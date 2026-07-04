@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LWS Field Manual — Whiteout Survival</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#060a10;
+    --ice-deep:#0a131f;
+    --ice-panel:#0f1c2c;
+    --ice-raise:#142536;
+    --frost:#dcebf5;
+    --frost:#dceaf5;
+    --frost-dim:#7e96ad;
+    --frost-faint:#516378;
+    --glacier:#5cc8f0;
+    --aurora:#54f0b8;
+    --ember:#ff8a3d;
+    --ember-gold:#ffc24d;
+    --blood:#ff5168;
+    --line:rgba(92,200,240,.14);
+    --line-soft:rgba(92,200,240,.07);
+    --shadow:0 24px 60px -20px rgba(0,0,0,.8);
+    --disp:'Saira Condensed',system-ui,sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+    --mono:'Space Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--void);
+    color:var(--frost);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:-2;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(84,240,184,.10), transparent 60%),
+      radial-gradient(1000px 700px at 10% 0%, rgba(92,200,240,.10), transparent 55%),
+      radial-gradient(900px 500px at 50% 110%, rgba(255,138,61,.07), transparent 60%),
+      var(--void);
+  }
+  ::selection{background:var(--ember);color:#1a0d04}
+
+  /* ---------- type ---------- */
+  .eyebrow{
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.42em;
+    text-transform:uppercase;color:var(--glacier);font-weight:700;
+  }
+  h1,h2,h3{font-family:var(--disp);font-weight:600;letter-spacing:.01em;line-height:1.02}
+  .display{
+    font-family:var(--disp);font-weight:700;text-transform:uppercase;
+    letter-spacing:.02em;
+  }
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:linear-gradient(180deg,rgba(6,10,16,.92),rgba(6,10,16,.55));
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;gap:18px;height:58px}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--disp);font-weight:700;
+    text-transform:uppercase;letter-spacing:.14em;font-size:1.02rem;white-space:nowrap}
+  .brand .tag{
+    color:var(--ember);border:1.5px solid var(--ember);border-radius:4px;
+    padding:1px 7px;font-family:var(--mono);font-size:.74rem;font-weight:700;letter-spacing:.1em;
+  }
+  .navlinks{display:flex;gap:4px;margin-left:auto;flex-wrap:nowrap;overflow-x:auto}
+  .navlinks a{
+    color:var(--frost-dim);text-decoration:none;font-family:var(--mono);
+    font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+    padding:7px 11px;border-radius:6px;white-space:nowrap;transition:.18s;
+  }
+  .navlinks a:hover{color:var(--frost);background:var(--line-soft)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  #snow{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.7}
+  .hero-svg{position:absolute;inset:0;width:100%;height:100%;z-index:0;object-fit:cover}
+  .hero-inner{position:relative;z-index:2;padding:96px 0 86px;max-width:1080px;margin:0 auto}
+  .hero-inner .wrap{padding:0 24px}
+  .dossier-stamp{
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:26px;
+    border:1px solid var(--line);border-radius:30px;padding:6px 8px 6px 16px;
+    background:rgba(10,19,31,.6);
+  }
+  .dossier-stamp .dot{width:7px;height:7px;border-radius:50%;background:var(--aurora);
+    box-shadow:0 0 12px var(--aurora);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  .dossier-stamp span{font-family:var(--mono);font-size:.64rem;letter-spacing:.34em;
+    text-transform:uppercase;color:var(--frost-dim)}
+  .dossier-stamp b{font-family:var(--mono);font-size:.64rem;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--ember);background:rgba(255,138,61,.12);
+    border:1px solid rgba(255,138,61,.3);border-radius:20px;padding:4px 11px;font-weight:700}
+  .hero h1{
+    font-size:clamp(3rem,9.5vw,6.4rem);text-transform:uppercase;font-weight:700;
+    letter-spacing:.005em;margin-bottom:6px;
+    background:linear-gradient(180deg,#fff 0%,var(--frost) 40%,#9fc4dd 100%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero h1 .fire{
+    background:linear-gradient(180deg,var(--ember-gold),var(--ember) 70%,var(--blood));
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hero .sub{font-family:var(--disp);font-weight:300;font-size:clamp(1.05rem,2.5vw,1.5rem);
+    text-transform:uppercase;letter-spacing:.34em;color:var(--glacier);margin-bottom:30px}
+  .hero p.lede{max-width:560px;color:var(--frost-dim);font-size:1.02rem}
+  .hero p.lede b{color:var(--frost);font-weight:600}
+  .telemetry{
+    display:flex;flex-wrap:wrap;gap:0;margin-top:38px;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    background:rgba(10,19,31,.55);max-width:620px;
+  }
+  .telemetry div{flex:1;min-width:130px;padding:15px 18px;border-right:1px solid var(--line-soft)}
+  .telemetry div:last-child{border-right:none}
+  .telemetry .k{font-family:var(--mono);font-size:.58rem;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--frost-faint);margin-bottom:5px}
+  .telemetry .v{font-family:var(--disp);font-weight:600;font-size:1.5rem;text-transform:uppercase;letter-spacing:.02em}
+  .telemetry .v.cold{color:var(--glacier)}
+  .telemetry .v.warm{color:var(--ember-gold)}
+  .telemetry .v.go{color:var(--aurora)}
+
+  /* ---------- section frame ---------- */
+  section.block{padding:84px 0;border-bottom:1px solid var(--line-soft);position:relative}
+  .sec-head{margin-bottom:42px;max-width:720px}
+  .sec-head .eyebrow{display:block;margin-bottom:14px}
+  .sec-head h2{font-size:clamp(2rem,5vw,3.1rem);text-transform:uppercase}
+  .sec-head p{color:var(--frost-dim);margin-top:14px;font-size:1.02rem}
+
+  /* ---------- timeline scrubber ---------- */
+  .core{
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:linear-gradient(180deg,var(--ice-panel),var(--ice-deep));
+    box-shadow:var(--shadow);
+  }
+  .core-readout{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:0;
+    border-bottom:1px solid var(--line);
+  }
+  .ro-left{padding:30px 32px;border-right:1px solid var(--line)}
+  .ro-day{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+  .ro-day .big{font-family:var(--disp);font-weight:700;font-size:4.6rem;line-height:.85;
+    color:var(--ember);letter-spacing:.01em;text-shadow:0 0 34px rgba(255,138,61,.35)}
+  .ro-day .lbl{font-family:var(--mono);font-size:.62rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--frost-faint)}
+  #eraName{font-family:var(--disp);font-weight:600;text-transform:uppercase;font-size:1.7rem;
+    letter-spacing:.06em;margin-top:18px;color:var(--frost)}
+  #eraDesc{color:var(--frost-dim);font-size:.95rem;margin-top:8px;min-height:44px}
+  .ro-right{padding:26px 32px;display:flex;flex-direction:column;gap:14px;justify-content:center}
+  .stat-row{display:flex;align-items:center;gap:14px}
+  .stat-row .badge{
+    width:46px;height:46px;flex-shrink:0;border-radius:10px;display:grid;place-items:center;
+    border:1px solid var(--line);background:rgba(92,200,240,.06);
+  }
+  .stat-row .badge svg{width:24px;height:24px}
+  .stat-row .info .t{font-family:var(--mono);font-size:.58rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--frost-faint)}
+  .stat-row .info .d{font-family:var(--disp);font-weight:600;font-size:1.16rem;text-transform:uppercase;
+    letter-spacing:.02em;color:var(--frost)}
+  .stat-row .info .d small{font-family:var(--body);font-weight:400;text-transform:none;
+    letter-spacing:0;color:var(--frost-dim);font-size:.78rem}
+
+  .core-track{padding:34px 32px 30px}
+  .track-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+  .track-meta .eyebrow{color:var(--frost-faint)}
+  #nextUp{font-family:var(--mono);font-size:.68rem;color:var(--aurora);letter-spacing:.06em}
+  .slider-shell{position:relative;padding-top:30px}
+  .ticks{position:absolute;top:0;left:0;right:0;height:24px}
+  .tick{position:absolute;transform:translateX(-50%);cursor:pointer;text-align:center}
+  .tick .nub{width:2px;height:9px;background:var(--frost-faint);margin:0 auto 3px;transition:.18s}
+  .tick .ti{font-family:var(--mono);font-size:.54rem;color:var(--frost-faint);letter-spacing:.04em;
+    transition:.18s;white-space:nowrap}
+  .tick:hover .nub{background:var(--glacier);height:13px}
+  .tick:hover .ti{color:var(--glacier)}
+  .tick.hero-gen .nub{background:rgba(255,138,61,.6)}
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:16px;border-radius:10px;
+    background:
+      linear-gradient(90deg,
+        #0a3a52 0%, #0e4a66 4%,
+        #11405e 12%, #123a5a 28%,
+        #16314f 50%, #1a2944 70%,
+        #221f3a 86%, #2a1830 100%);
+    border:1px solid var(--line);outline:none;cursor:pointer;
+    box-shadow:inset 0 2px 10px rgba(0,0,0,.6);
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;
+    background:radial-gradient(circle at 35% 30%,#ffd98a,var(--ember) 55%,#c23d12);
+    border:2px solid #1a0d04;cursor:grab;
+    box-shadow:0 0 0 4px rgba(255,138,61,.18),0 0 22px rgba(255,138,61,.7);
+  }
+  input[type=range]::-webkit-slider-thumb:active{cursor:grabbing}
+  input[type=range]::-moz-range-thumb{
+    width:22px;height:22px;border-radius:50%;border:2px solid #1a0d04;
+    background:radial-gradient(circle at 35% 30%,#ffd98a,var(--ember) 55%,#c23d12);
+    box-shadow:0 0 0 4px rgba(255,138,61,.18),0 0 22px rgba(255,138,61,.7);cursor:grab}
+  input[type=range]:focus-visible{box-shadow:inset 0 2px 10px rgba(0,0,0,.6),0 0 0 3px var(--glacier)}
+  .track-legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;
+    padding-top:18px;border-top:1px solid var(--line-soft)}
+  .track-legend span{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;
+    text-transform:uppercase;color:var(--frost-dim);display:flex;align-items:center;gap:7px}
+  .track-legend i{width:18px;height:6px;border-radius:3px;display:inline-block}
+
+  /* ---------- weekly cadence ---------- */
+  .week{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+  .day-col{
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    background:var(--ice-panel);min-height:230px;display:flex;flex-direction:column;
+  }
+  .day-col .dh{padding:11px 12px;border-bottom:1px solid var(--line);
+    background:rgba(92,200,240,.05)}
+  .day-col .dh .dn{font-family:var(--disp);font-weight:700;text-transform:uppercase;
+    letter-spacing:.14em;font-size:.92rem;color:var(--frost)}
+  .day-col .dh .dd{font-family:var(--mono);font-size:.54rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--frost-faint)}
+  .day-col .body{padding:10px;display:flex;flex-direction:column;gap:7px;flex:1}
+  .ev-pill{
+    font-family:var(--mono);font-size:.62rem;letter-spacing:.04em;padding:7px 9px;border-radius:7px;
+    border:1px solid var(--line);line-height:1.3;color:var(--frost);background:rgba(255,255,255,.02)}
+  .ev-pill.war{border-color:rgba(255,81,104,.4);background:rgba(255,81,104,.08);color:#ffb3bd}
+  .ev-pill.bear{border-color:rgba(255,194,77,.4);background:rgba(255,194,77,.08);color:var(--ember-gold)}
+  .ev-pill.prep{border-color:rgba(84,240,184,.35);background:rgba(84,240,184,.07);color:var(--aurora)}
+  .ev-pill.solo{border-color:rgba(92,200,240,.4);background:rgba(92,200,240,.08);color:var(--glacier)}
+  .week-note{margin-top:18px;font-family:var(--mono);font-size:.72rem;color:var(--frost-dim);
+    display:flex;align-items:flex-start;gap:10px}
+  .week-note b{color:var(--ember-gold)}
+
+  /* ---------- codex ---------- */
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+  .filters button{
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--frost-dim);background:transparent;border:1px solid var(--line);
+    padding:9px 15px;border-radius:30px;cursor:pointer;transition:.18s}
+  .filters button:hover{color:var(--frost);border-color:var(--glacier)}
+  .filters button.active{color:var(--void);background:var(--glacier);border-color:var(--glacier);font-weight:700}
+  .codex{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:16px}
+  .ev{
+    border:1px solid var(--line);border-radius:14px;background:var(--ice-panel);
+    overflow:hidden;transition:.22s;cursor:pointer;position:relative;
+  }
+  .ev:hover{border-color:var(--glacier);transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(92,200,240,.5)}
+  .ev .ev-top{display:flex;gap:14px;padding:18px 18px 14px;align-items:flex-start}
+  .ev .ic{width:50px;height:50px;flex-shrink:0;border-radius:11px;border:1px solid var(--line);
+    display:grid;place-items:center;background:rgba(0,0,0,.25)}
+  .ev .ic svg{width:30px;height:30px}
+  .ev .ev-ti{flex:1;min-width:0}
+  .ev .ev-ti h3{font-size:1.32rem;text-transform:uppercase;letter-spacing:.02em;color:var(--frost)}
+  .ev .cadence{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+    margin-top:4px;color:var(--glacier)}
+  .ev .tagline{padding:0 18px 16px;color:var(--frost-dim);font-size:.9rem}
+  .ev .chips{padding:0 18px 16px;display:flex;gap:6px;flex-wrap:wrap}
+  .ev .chips span{font-family:var(--mono);font-size:.54rem;letter-spacing:.08em;text-transform:uppercase;
+    padding:4px 9px;border-radius:20px;border:1px solid var(--line-soft);color:var(--frost-faint)}
+  .ev .req{color:var(--ember-gold);border-color:rgba(255,194,77,.3)!important}
+  .ev .more{
+    font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--frost-faint);padding:0 18px 16px;display:flex;align-items:center;gap:7px}
+  .ev .more .plus{transition:.25s}
+  .ev .detail{max-height:0;overflow:hidden;transition:max-height .4s ease;border-top:0 solid var(--line)}
+  .ev.open{border-color:var(--glacier);cursor:default}
+  .ev.open .detail{max-height:1400px;border-top:1px solid var(--line)}
+  .ev.open .more .plus{transform:rotate(45deg)}
+  .detail-inner{padding:20px 18px 6px}
+  .detail-inner h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--glacier);margin:0 0 9px}
+  .detail-inner ul{list-style:none;margin:0 0 18px}
+  .detail-inner li{position:relative;padding-left:18px;margin-bottom:7px;font-size:.9rem;color:var(--frost)}
+  .detail-inner li::before{content:"";position:absolute;left:2px;top:.62em;width:5px;height:5px;
+    border-radius:1px;background:var(--glacier);transform:rotate(45deg)}
+  .vetnote{
+    margin:4px 0 20px;padding:15px 16px;border-radius:11px;
+    border:1px solid rgba(255,138,61,.3);background:rgba(255,138,61,.07);
+    position:relative;
+  }
+  .vetnote .vh{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ember);font-weight:700;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+  .vetnote p{font-size:.9rem;color:#f4dcc8;font-style:italic}
+
+  /* ---------- ranks ---------- */
+  .ranks{display:flex;flex-direction:column;gap:10px}
+  .rank{
+    display:grid;grid-template-columns:84px 1fr;gap:0;align-items:stretch;
+    border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--ice-panel);
+    transition:.2s}
+  .rank:hover{border-color:var(--glacier);transform:translateX(4px)}
+  .rank .rk{display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:2rem;
+    text-transform:uppercase;border-right:1px solid var(--line);background:rgba(0,0,0,.25)}
+  .rank .rb{padding:15px 18px}
+  .rank .rb .rt{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+    font-size:1.18rem;margin-bottom:3px}
+  .rank .rb p{font-size:.88rem;color:var(--frost-dim)}
+  .rank.r1 .rk{color:var(--frost-faint)}
+  .rank.r2 .rk,.rank.r3 .rk{color:var(--glacier)}
+  .rank.r4 .rk{color:var(--aurora)}
+  .rank.r5 .rk{color:var(--ember);text-shadow:0 0 22px rgba(255,138,61,.4)}
+  .rank.r5{border-color:rgba(255,138,61,.35)}
+
+  /* ---------- playbook ---------- */
+  .doctrine{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .doc{border:1px solid var(--line);border-radius:13px;padding:22px;background:var(--ice-panel);
+    transition:.2s;position:relative;overflow:hidden}
+  .doc:hover{border-color:var(--aurora)}
+  .doc .num{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;color:var(--aurora);margin-bottom:14px}
+  .doc h3{font-size:1.34rem;text-transform:uppercase;letter-spacing:.02em;margin-bottom:9px;color:var(--frost)}
+  .doc p{font-size:.9rem;color:var(--frost-dim)}
+  .doc p b{color:var(--frost);font-weight:600}
+
+  /* ---------- glossary ---------- */
+  .gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .term{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:var(--ice-panel)}
+  .term .tk{font-family:var(--mono);font-weight:700;color:var(--glacier);font-size:.82rem;letter-spacing:.04em}
+  .term .tv{font-size:.84rem;color:var(--frost-dim);margin-top:3px}
+
+  /* ---------- footer ---------- */
+  footer{padding:60px 0 50px;text-align:center}
+  footer .stamp{display:inline-block;border:1.5px solid var(--ember);color:var(--ember);
+    font-family:var(--mono);font-size:.64rem;letter-spacing:.3em;text-transform:uppercase;
+    padding:10px 22px;border-radius:6px;transform:rotate(-2deg);font-weight:700;margin-bottom:24px}
+  footer p{color:var(--frost-faint);font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;line-height:2}
+  footer a{color:var(--frost-dim);text-decoration:none;border-bottom:1px solid var(--line)}
+
+  @media(max-width:760px){
+    .core-readout{grid-template-columns:1fr}
+    .ro-left{border-right:none;border-bottom:1px solid var(--line)}
+    .week{grid-template-columns:repeat(2,1fr)}
+    .ro-day .big{font-size:3.6rem}
+    .navlinks{display:none}
+  }
+  @media(max-width:440px){.week{grid-template-columns:1fr}}
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+    #snow{display:none}
+  }
+
+  /* ---------- events dropdown (nav) ---------- */
+  .nav-events{position:relative;margin-left:12px}
+  .nav-events>button{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--void);background:var(--glacier);border:1px solid var(--glacier);padding:8px 14px;border-radius:7px;
+    cursor:pointer;display:flex;align-items:center;gap:7px;font-weight:700;transition:.18s;white-space:nowrap}
+  .nav-events>button:hover{background:#7bd8f7;border-color:#7bd8f7}
+  .nav-events>button .caret{transition:.2s;font-size:.7rem}
+  .nav-events.open>button .caret{transform:rotate(180deg)}
+  .nav-dd{position:absolute;top:calc(100% + 12px);right:0;width:min(720px,94vw);max-height:74vh;overflow-y:auto;
+    background:rgba(9,15,23,.98);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);padding:18px;opacity:0;visibility:hidden;transform:translateY(-8px);
+    transition:.2s;z-index:60;display:grid;grid-template-columns:1fr 1fr;gap:4px 24px}
+  .nav-events.open .nav-dd{opacity:1;visibility:visible;transform:translateY(0)}
+  .dd-group{margin-bottom:10px}
+  .dd-group h4{font-family:var(--mono);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--glacier);padding:6px 8px 6px 0;border-bottom:1px solid var(--line-soft);margin-bottom:5px}
+  .dd-link{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:transparent;border:none;
+    color:var(--frost-dim);font-family:var(--body);font-size:.82rem;padding:6px 8px;border-radius:6px;cursor:pointer;
+    transition:.14s;text-decoration:none}
+  .dd-link:hover{background:var(--line-soft);color:var(--frost)}
+  .dd-link .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .dd-link .star{margin-left:auto;color:var(--ember);font-size:.6rem;font-family:var(--mono)}
+
+  /* ---------- events landing ---------- */
+  .ev-cat{margin-bottom:36px}
+  .ev-cat-h{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .ev-cat-h .cn{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;color:var(--frost-faint);white-space:nowrap}
+  .ev-cat-h h3{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:1.4rem;white-space:nowrap}
+  .ev-cat-h .line{flex:1;height:1px;background:var(--line)}
+  .ev-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:12px}
+  .ev-tile{display:flex;gap:13px;align-items:center;text-align:left;background:var(--ice-panel);
+    border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;transition:.2s;width:100%;font-family:var(--body)}
+  .ev-tile:hover{border-color:var(--glacier);transform:translateY(-3px);box-shadow:0 16px 36px -22px rgba(92,200,240,.5)}
+  .ev-tile .ic{width:44px;height:44px;flex-shrink:0;border-radius:10px;border:1px solid var(--line);
+    display:grid;place-items:center;background:rgba(0,0,0,.25)}
+  .ev-tile .ic svg{width:27px;height:27px}
+  .ev-tile .tx{min-width:0;flex:1}
+  .ev-tile .tx .nm{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em;
+    font-size:1.05rem;color:var(--frost);line-height:1.08}
+  .ev-tile .tx .cd{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--glacier);margin-top:3px}
+  .ev-tile .tx .typ{font-size:.78rem;color:var(--frost-dim);margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;
+    -webkit-box-orient:vertical;overflow:hidden}
+  .ev-tile .arr{color:var(--frost-faint);font-family:var(--mono);transition:.2s;flex-shrink:0}
+  .ev-tile:hover .arr{color:var(--ember);transform:translateX(3px)}
+
+  /* ---------- reader overlay ---------- */
+  body.reader-lock{overflow:hidden}
+  .reader{position:fixed;inset:0;z-index:200;display:flex;justify-content:flex-end;opacity:0;visibility:hidden;transition:.3s}
+  .reader.open{opacity:1;visibility:visible}
+  .reader-scrim{position:absolute;inset:0;background:rgba(3,6,10,.72);backdrop-filter:blur(3px)}
+  .reader-panel{position:relative;width:min(760px,100%);height:100%;overflow-y:auto;
+    background:linear-gradient(180deg,var(--ice-deep),var(--void));border-left:1px solid var(--line);
+    box-shadow:-30px 0 80px -20px #000;transform:translateX(40px);transition:.3s}
+  .reader.open .reader-panel{transform:translateX(0)}
+  .reader-top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:18px 26px;
+    background:rgba(10,16,24,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .reader-top .ic{width:48px;height:48px;border-radius:11px;border:1px solid var(--line);display:grid;place-items:center;
+    background:rgba(0,0,0,.3);flex-shrink:0}
+  .reader-top .ic svg{width:29px;height:29px}
+  .reader-top .ti{flex:1;min-width:0}
+  .reader-top .ti h2{font-family:var(--disp);font-weight:700;text-transform:uppercase;font-size:1.55rem;
+    letter-spacing:.02em;line-height:1;color:var(--frost)}
+  .reader-top .ti .cd{font-family:var(--mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--glacier);margin-top:5px}
+  .reader-close{width:38px;height:38px;border-radius:9px;border:1px solid var(--line);background:transparent;
+    color:var(--frost-dim);font-size:1.1rem;cursor:pointer;flex-shrink:0;transition:.18s;line-height:1}
+  .reader-close:hover{color:var(--frost);border-color:var(--blood);background:rgba(255,81,104,.1)}
+  .reader-body{padding:26px}
+  .qfacts{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:1px;background:var(--line-soft);
+    border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:30px}
+  .qfacts div{background:var(--ice-panel);padding:13px 15px}
+  .qfacts .k{font-family:var(--mono);font-size:.52rem;letter-spacing:.16em;text-transform:uppercase;color:var(--frost-faint);margin-bottom:4px}
+  .qfacts .v{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:.98rem;color:var(--frost)}
+  .rsec{margin-bottom:26px}
+  .rsec>h3{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--glacier);margin-bottom:13px;display:flex;align-items:center;gap:10px}
+  .rsec>h3::before{content:"";width:14px;height:2px;background:var(--ember);flex-shrink:0}
+  .rsec>p{color:var(--frost-dim);font-size:.95rem;margin-bottom:10px}
+  .rsteps{counter-reset:s;list-style:none}
+  .rsteps li{position:relative;padding:0 0 16px 42px;counter-increment:s;font-size:.93rem;color:var(--frost)}
+  .rsteps li::before{content:counter(s,decimal-leading-zero);position:absolute;left:0;top:-3px;
+    font-family:var(--mono);font-weight:700;font-size:.76rem;color:var(--ember);
+    border:1px solid rgba(255,138,61,.4);border-radius:7px;width:28px;height:28px;display:grid;place-items:center}
+  .rsteps li:not(:last-child)::after{content:"";position:absolute;left:14px;top:28px;bottom:4px;width:1px;background:var(--line)}
+  .rsteps li b{color:var(--ember-gold);font-weight:600}
+  .rlist{list-style:none}
+  .rlist li{position:relative;padding-left:19px;margin-bottom:9px;font-size:.93rem;color:var(--frost)}
+  .rlist li::before{content:"";position:absolute;left:2px;top:.58em;width:5px;height:5px;background:var(--glacier);transform:rotate(45deg)}
+  .rlist li b{color:var(--ember-gold);font-weight:600}
+  .loadout{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .lo{border:1px solid var(--line);border-radius:10px;padding:13px 15px;background:rgba(92,200,240,.04)}
+  .lo .lh{font-family:var(--mono);font-size:.54rem;letter-spacing:.14em;text-transform:uppercase;color:var(--frost-faint);margin-bottom:6px}
+  .lo .lv{font-size:.9rem;color:var(--frost)}
+  .lo .lv b{color:var(--ember-gold);font-weight:600}
+  .ratio-bar{display:flex;height:36px;border-radius:9px;overflow:hidden;border:1px solid var(--line);margin-bottom:9px}
+  .ratio-bar span{display:grid;place-items:center;color:#06121c;font-weight:700;letter-spacing:.03em;font-family:var(--mono);font-size:.64rem}
+  .ratio-inf{background:linear-gradient(180deg,#7fd8f5,#4fa9cc)}
+  .ratio-lan{background:linear-gradient(180deg,#9fe9c8,#46c79a)}
+  .ratio-mar{background:linear-gradient(180deg,#ffcf7a,#ef9a3c)}
+  .ratio-leg{display:flex;gap:18px;font-family:var(--mono);font-size:.56rem;text-transform:uppercase;letter-spacing:.08em;color:var(--frost-dim);flex-wrap:wrap}
+  .ratio-leg i{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:6px;vertical-align:middle}
+  .alliance-box{border:1px solid rgba(84,240,184,.3);background:rgba(84,240,184,.06);border-radius:12px;padding:18px 18px 9px}
+  .alliance-box .ah{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--aurora);
+    font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+  .vetbox{border:1px solid rgba(255,138,61,.3);background:rgba(255,138,61,.07);border-radius:12px;padding:16px 18px}
+  .vetbox .vh{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ember);font-weight:700;margin-bottom:8px}
+  .vetbox p{color:#f4dcc8;font-style:italic;font-size:.92rem;margin:0}
+  @media(max-width:760px){
+    .nav-events{display:block;margin-left:auto}
+    .nav-dd{grid-template-columns:1fr;position:fixed;left:10px;right:10px;width:auto}
+    .loadout{grid-template-columns:1fr}
+    .reader-top .ti h2{font-size:1.3rem}
+  }
+
+
+  /* ===== full-page event view ===== */
+  .event-page{min-height:60vh}
+  .ep-hero{position:relative;padding:42px 0 30px;border-bottom:1px solid var(--line);
+    background:radial-gradient(800px 320px at 82% -20%,rgba(255,138,61,.10),transparent 60%),linear-gradient(180deg,var(--ice-panel),var(--ice-deep))}
+  .ep-back{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--frost-dim);background:transparent;border:1px solid var(--line);
+    padding:9px 15px;border-radius:30px;cursor:pointer;transition:.18s;margin-bottom:22px}
+  .ep-back:hover{color:var(--frost);border-color:var(--glacier);background:var(--line-soft)}
+  .ep-cat{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:11px;font-weight:700}
+  .ep-head{display:flex;gap:18px;align-items:center}
+  .ep-head .ic{width:66px;height:66px;border-radius:15px;border:1px solid var(--line);display:grid;place-items:center;
+    background:rgba(0,0,0,.3);flex-shrink:0}
+  .ep-head .ic svg{width:40px;height:40px}
+  .ep-head h1{font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.01em;
+    font-size:clamp(2.1rem,6vw,3.4rem);line-height:.95;color:var(--frost)}
+  .ep-head .cd{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glacier);margin-top:7px}
+  .ep-qf{margin-top:26px;max-width:680px}
+  .ep-body{padding:34px 0 10px}
+  .ep-lede{font-size:1.06rem;color:var(--frost-dim);max-width:760px;margin-bottom:30px;line-height:1.7}
+  .ep-body .rsec{max-width:780px;margin-bottom:30px}
+  .ep-body .rsec>h3{font-size:.64rem}
+  .ep-foot{padding:18px 0 70px}
+  /* callouts */
+  .callout{display:flex;gap:14px;border-radius:13px;padding:16px 18px;margin:0 0 26px;border:1px solid;max-width:780px;align-items:flex-start}
+  .callout .co-ic{flex-shrink:0;width:24px;height:24px;margin-top:1px}
+  .callout .co-ic svg{width:24px;height:24px}
+  .callout .co-t{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.08rem;margin-bottom:4px}
+  .callout .co-d{font-size:.92rem;color:var(--frost-dim)}
+  .callout.good{border-color:rgba(84,240,184,.32);background:rgba(84,240,184,.07)}
+  .callout.good .co-t{color:var(--aurora)}
+  .callout.warn{border-color:rgba(255,138,61,.34);background:rgba(255,138,61,.07)}
+  .callout.warn .co-t{color:var(--ember)}
+  .callout.info{border-color:rgba(92,200,240,.32);background:rgba(92,200,240,.07)}
+  .callout.info .co-t{color:var(--glacier)}
+  /* phases */
+  .phases{display:grid;gap:12px}
+  .phase{display:grid;grid-template-columns:74px 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--ice-panel)}
+  .phase .pn{display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:1.5rem;color:var(--ember);
+    background:rgba(255,138,61,.08);border-right:1px solid var(--line)}
+  .phase .pb{padding:14px 16px}
+  .phase .ptime{font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;color:var(--frost-faint);text-transform:uppercase}
+  .phase h4{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.18rem;color:var(--frost);margin:3px 0 5px}
+  .phase .pgoal{font-size:.9rem;color:var(--frost-dim);margin-bottom:10px}
+  .phase .pblds{display:flex;flex-wrap:wrap;gap:6px}
+  .phase .pblds span{font-family:var(--mono);font-size:.55rem;letter-spacing:.04em;padding:4px 9px;border-radius:20px;
+    border:1px solid var(--line);color:var(--frost-dim)}
+  /* building cards */
+  .btable{display:grid;gap:10px}
+  .bcard{border:1px solid var(--line);border-left-width:3px;border-radius:11px;padding:14px 16px;background:var(--ice-panel)}
+  .bcard.pr-top{border-left-color:var(--ember)}
+  .bcard.pr-high{border-left-color:var(--glacier)}
+  .bcard.pr-mid{border-left-color:var(--aurora)}
+  .bcard.pr-low{border-left-color:var(--frost-faint)}
+  .bc-top{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .bc-name{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:1.12rem;color:var(--frost)}
+  .bc-pr{margin-left:auto;font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;padding:3px 9px;border-radius:20px;
+    border:1px solid var(--line);color:var(--frost-dim);white-space:nowrap}
+  .pr-top .bc-pr{color:var(--ember);border-color:rgba(255,138,61,.4)}
+  .pr-high .bc-pr{color:var(--glacier);border-color:rgba(92,200,240,.4)}
+  .bc-stats{display:flex;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+  .bc-pill{font-family:var(--mono);font-size:.6rem;letter-spacing:.03em;color:var(--frost);background:rgba(92,200,240,.06);
+    border:1px solid var(--line-soft);border-radius:7px;padding:4px 10px}
+  .bc-pill b{color:var(--ember-gold)}
+  .bc-eff{font-size:.88rem;color:var(--frost-dim)}
+  /* stacked ratios */
+  .ratio-block{margin-bottom:16px}
+  .ratio-lbl{font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;color:var(--frost-dim);margin-bottom:7px;text-transform:uppercase}
+  /* split columns */
+  .split2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .splitcol{border:1px solid var(--line);border-radius:12px;padding:16px 18px 8px;background:var(--ice-panel)}
+  .sc-h{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:1.1rem;margin-bottom:12px}
+  .splitcol:first-child .sc-h{color:var(--ember-gold)}
+  .splitcol:last-child .sc-h{color:var(--glacier)}
+  /* roles */
+  .roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .role{border:1px solid var(--line);border-radius:11px;padding:13px 15px;background:var(--ice-panel)}
+  .role .rn{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glacier);margin-bottom:5px}
+  .role .rd{font-size:.88rem;color:var(--frost-dim)}
+  /* checklist */
+  .checklist{list-style:none}
+  .checklist li{position:relative;padding:9px 0 9px 34px;font-size:.93rem;color:var(--frost);border-bottom:1px solid var(--line-soft)}
+  .checklist li:last-child{border-bottom:none}
+  .checklist li::before{content:"";position:absolute;left:0;top:9px;width:18px;height:18px;border-radius:5px;
+    border:1.5px solid var(--glacier);background:rgba(92,200,240,.08)}
+  .checklist li::after{content:"\2713";position:absolute;left:4px;top:7px;color:var(--glacier);font-size:.82rem;font-weight:700}
+  .rlist.warn li::before{background:var(--ember)}
+  .rlist.gold li::before{background:var(--ember-gold)}
+  @media(max-width:680px){
+    .split2,.roles{grid-template-columns:1fr}
+    .phase{grid-template-columns:58px 1fr}
+  }
+
+
+  /* ===== leadership-guide blocks ===== */
+  .flow{display:grid;gap:10px}
+  .flowstep{display:grid;grid-template-columns:132px 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--ice-panel)}
+  .flowstep .fs-l{padding:13px 14px;border-right:1px solid var(--line);background:rgba(92,200,240,.05)}
+  .flowstep .fs-lbl{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1rem;color:var(--frost)}
+  .flowstep .fs-time{font-family:var(--mono);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ember);margin-top:3px}
+  .flowstep .fs-r{padding:12px 15px;display:flex;flex-direction:column;gap:7px}
+  .fs-row{font-size:.86rem;color:var(--frost-dim)}
+  .fs-row span{font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;color:var(--frost-faint);display:inline-block;margin-right:8px;border:1px solid var(--line-soft);border-radius:20px;padding:2px 7px}
+  .fs-row.you{color:var(--frost)}
+  .fs-row.you span{color:var(--aurora);border-color:rgba(84,240,184,.3)}
+  /* setups */
+  .setups{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .setup{border:1px solid var(--line);border-radius:12px;padding:15px 16px;background:var(--ice-panel)}
+  .setup .su-h{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.1rem;color:var(--frost)}
+  .setup .su-split{font-family:var(--mono);font-size:.64rem;color:var(--ember-gold);margin:6px 0 12px;letter-spacing:.01em}
+  .setup .su-rows{display:flex;flex-direction:column;gap:8px}
+  .setup .su-rows>div{font-size:.84rem;color:var(--frost-dim)}
+  .setup .su-rows span{display:block;font-family:var(--mono);font-size:.48rem;letter-spacing:.14em;color:var(--frost-faint);margin-bottom:2px}
+  /* duties */
+  .duties{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .duty{border:1px solid var(--line);border-left:3px solid var(--glacier);border-radius:11px;padding:14px 16px;background:var(--ice-panel)}
+  .duty .du-role{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.08rem;color:var(--frost)}
+  .duty .du-job{font-size:.85rem;color:var(--frost-dim);margin:5px 0 11px}
+  .duty .du-meta{display:flex;flex-direction:column;gap:8px}
+  .duty .du-meta>div{font-size:.82rem;color:var(--frost-dim)}
+  .duty .du-meta span{display:block;font-family:var(--mono);font-size:.48rem;letter-spacing:.14em;color:var(--frost-faint);margin-bottom:2px}
+  /* cases */
+  .cases{display:grid;gap:10px}
+  .case{display:grid;grid-template-columns:1fr 1.45fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--ice-panel)}
+  .case .ca-if{padding:13px 15px;border-right:1px solid var(--line);background:rgba(255,138,61,.05);font-size:.88rem;color:var(--frost)}
+  .case .ca-do{padding:13px 15px;font-size:.88rem;color:var(--frost-dim)}
+  .case span{display:block;font-family:var(--mono);font-size:.48rem;letter-spacing:.14em;margin-bottom:4px}
+  .case .ca-if span{color:var(--ember)}
+  .case .ca-do span{color:var(--aurora)}
+  /* scripts */
+  .scripts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .script{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#070d15}
+  .script .sc-t{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--glacier);padding:10px 14px;border-bottom:1px solid var(--line);background:rgba(92,200,240,.05)}
+  .script pre{font-family:var(--mono);font-size:.72rem;line-height:1.7;color:var(--frost);padding:13px 14px;white-space:pre-wrap;word-break:break-word;margin:0}
+  /* metrics */
+  .metrics{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .metric{display:grid;grid-template-columns:1.1fr 1.5fr 1fr;border-bottom:1px solid var(--line-soft)}
+  .metric:last-child{border-bottom:none}
+  .metric>div{padding:11px 14px;font-size:.84rem;color:var(--frost-dim)}
+  .metric .me-m{color:var(--frost);font-weight:500}
+  .metric .me-good{color:var(--aurora)}
+  .metric.mh>div{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--frost-faint);background:rgba(92,200,240,.05)}
+  /* template */
+  .template{font-family:var(--mono);font-size:.76rem;line-height:1.8;color:var(--frost);background:#070d15;border:1px solid var(--line);border-radius:11px;padding:16px 18px;white-space:pre-wrap;margin:0}
+  /* decision flowchart */
+  .decision{display:flex;flex-direction:column}
+  .decision .dn{position:relative;margin-top:30px}
+  .decision .dn:first-child{margin-top:0}
+  .decision .dn:not(:first-child)::before{content:"";position:absolute;top:-30px;left:50%;width:2px;height:22px;background:var(--line);transform:translateX(-50%)}
+  .decision .dn:not(:first-child)::after{content:"";position:absolute;top:-12px;left:50%;width:7px;height:7px;border-right:2px solid var(--frost-faint);border-bottom:2px solid var(--frost-faint);transform:translateX(-50%) rotate(45deg)}
+  .dn.start,.dn.end{align-self:center;font-family:var(--disp);font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:10px 24px;border-radius:30px;font-size:1rem;text-align:center}
+  .dn.start{background:rgba(84,240,184,.12);border:1px solid rgba(84,240,184,.4);color:var(--aurora)}
+  .dn.end{background:rgba(255,138,61,.12);border:1px solid rgba(255,138,61,.4);color:var(--ember)}
+  .dn.phase{align-self:center;font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--glacier);background:rgba(92,200,240,.08);border:1px solid rgba(92,200,240,.3);border-radius:8px;padding:8px 16px;text-align:center}
+  .dn.act{align-self:center;max-width:440px;border:1px solid var(--line);border-radius:10px;background:var(--ice-panel);padding:12px 16px;font-size:.9rem;color:var(--frost);text-align:center}
+  .dn.q{border:1px solid rgba(255,194,77,.3);border-radius:12px;background:rgba(255,194,77,.04);padding:14px 16px}
+  .dn.q .q-t{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:1.02rem;color:var(--ember-gold);margin-bottom:11px;text-align:center}
+  .dn.q .q-br{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .dn.q .q-yes,.dn.q .q-no{border-radius:9px;padding:10px 12px;font-size:.84rem;color:var(--frost-dim)}
+  .dn.q .q-yes{border:1px solid rgba(84,240,184,.3);background:rgba(84,240,184,.06)}
+  .dn.q .q-no{border:1px solid rgba(255,81,104,.28);background:rgba(255,81,104,.06)}
+  .dn.q .q-yes span,.dn.q .q-no span{display:block;font-family:var(--mono);font-size:.54rem;letter-spacing:.1em;margin-bottom:5px}
+  .dn.q .q-yes span{color:var(--aurora)}
+  .dn.q .q-no span{color:var(--blood)}
+  @media(max-width:680px){
+    .setups,.duties,.scripts{grid-template-columns:1fr}
+    .flowstep{grid-template-columns:104px 1fr}
+    .case,.metric{grid-template-columns:1fr}
+    .metric.mh{display:none}
+    .dn.q .q-br{grid-template-columns:1fr}
+  }
+
+
+  /* ===== restored full event index (directory) ===== */
+  .idx-divider{margin:50px 0 22px;padding-top:34px;border-top:1px solid var(--line)}
+  .idx-divider .eyebrow{display:block;margin-bottom:11px}
+  .idx-divider h3{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.03em;font-size:1.7rem;color:var(--frost)}
+  .idx-divider p{color:var(--frost-dim);margin-top:8px;font-size:.95rem;max-width:660px}
+  .idx-group{margin-bottom:22px;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--ice-panel)}
+  .idx-gh{display:flex;align-items:center;gap:12px;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(92,200,240,.04)}
+  .idx-gh h4{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:1.1rem}
+  .idx-gh .idx-cnt{margin-left:auto;font-family:var(--mono);font-size:.6rem;color:var(--frost-faint);border:1px solid var(--line);border-radius:20px;padding:3px 10px}
+  .idx-row{display:grid;grid-template-columns:auto minmax(150px,210px) 1fr;align-items:center;gap:13px;width:100%;text-align:left;
+    background:transparent;border:none;border-bottom:1px solid var(--line-soft);padding:11px 18px;cursor:pointer;transition:.14s;font-family:var(--body)}
+  .idx-row:last-child{border-bottom:none}
+  .idx-row:hover{background:var(--line-soft)}
+  .idx-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .idx-nm{font-family:var(--disp);font-weight:600;text-transform:uppercase;letter-spacing:.02em;font-size:.98rem;color:var(--frost)}
+  .idx-star{color:var(--ember);font-size:.62rem;font-family:var(--mono);margin-left:6px}
+  .idx-desc{font-size:.82rem;color:var(--frost-dim)}
+  .idx-row:hover .idx-nm{color:var(--glacier)}
+  @media(max-width:680px){
+    .idx-row{grid-template-columns:auto 1fr}
+    .idx-row .idx-desc{display:none}
+  }
+
+
+  /* ===== data table block ===== */
+  .dtable{display:grid;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--ice-panel)}
+  .dtable .dth{font-family:var(--mono);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:var(--frost-faint);
+    background:rgba(92,200,240,.05);padding:11px 14px;border-bottom:1px solid var(--line);align-self:stretch}
+  .dtable .dtc{padding:11px 14px;font-size:.86rem;color:var(--frost-dim);border-bottom:1px solid var(--line-soft)}
+  .dtable .dtc b{color:var(--frost)}
+  @media(max-width:680px){.dtable .dth,.dtable .dtc{padding:9px 11px;font-size:.78rem}}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="tag">LWS</span> Field Manual</div>
+    <div class="navlinks">
+      <a href="#timeline">Timeline</a>
+      <a href="#ranks">Ranks</a>
+      <a href="#gloss">Glossary</a>
+    </div>
+    <div class="nav-events" id="navEvents">
+      <button id="navEventsBtn" aria-haspopup="true" aria-expanded="false">Events <span class="caret">&#9662;</span></button>
+      <div class="nav-dd" id="navDD" role="menu"></div>
+    </div>
+  </div>
+</nav>
+
+<div id="home">
+
+<!-- ============== HERO ============== -->
+<header class="hero">
+  <svg class="hero-svg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#07101c"/><stop offset="1" stop-color="#0a1828"/>
+      </linearGradient>
+      <linearGradient id="aur" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#54f0b8" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#54f0b8" stop-opacity=".5"/>
+        <stop offset="1" stop-color="#5cc8f0" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="aur2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#5cc8f0" stop-opacity="0"/>
+        <stop offset=".5" stop-color="#7be0ff" stop-opacity=".35"/>
+        <stop offset="1" stop-color="#54f0b8" stop-opacity="0"/>
+      </linearGradient>
+      <radialGradient id="furn" cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color="#ffd98a"/><stop offset=".4" stop-color="#ff8a3d"/>
+        <stop offset="1" stop-color="#ff8a3d" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="snowfield" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#16283c"/><stop offset="1" stop-color="#0a131f"/>
+      </linearGradient>
+    </defs>
+    <rect width="1440" height="760" fill="url(#sky)"/>
+    <!-- aurora -->
+    <path d="M-50,150 Q400,40 760,170 T1500,150" fill="none" stroke="url(#aur)" stroke-width="120" opacity=".5" filter="blur(2px)"/>
+    <path d="M-50,250 Q500,150 900,260 T1500,240" fill="none" stroke="url(#aur2)" stroke-width="70" opacity=".5"/>
+    <!-- stars -->
+    <g fill="#dceaf5">
+      <circle cx="120" cy="90" r="1.1" opacity=".7"/><circle cx="300" cy="60" r="1.4" opacity=".5"/>
+      <circle cx="520" cy="110" r="1" opacity=".6"/><circle cx="900" cy="70" r="1.3" opacity=".7"/>
+      <circle cx="1120" cy="120" r="1.1" opacity=".5"/><circle cx="1320" cy="80" r="1.4" opacity=".6"/>
+      <circle cx="700" cy="50" r="1" opacity=".5"/><circle cx="1000" cy="160" r="1" opacity=".4"/>
+    </g>
+    <!-- distant ridge -->
+    <path d="M0,470 L180,420 L360,460 L560,410 L760,455 L980,405 L1200,450 L1440,415 L1440,760 L0,760 Z" fill="#0e1d2e" opacity=".85"/>
+    <!-- city silhouettes -->
+    <g fill="#13263a" opacity=".9">
+      <rect x="240" y="430" width="34" height="70"/><rect x="282" y="450" width="22" height="50"/>
+      <rect x="980" y="425" width="30" height="75"/><rect x="1016" y="448" width="20" height="52"/>
+      <rect x="1180" y="440" width="26" height="60"/>
+    </g>
+    <!-- snowfield -->
+    <path d="M0,490 L1440,470 L1440,760 L0,760 Z" fill="url(#snowfield)"/>
+    <!-- the furnace fire (the one warm thing) -->
+    <circle cx="720" cy="500" r="150" fill="url(#furn)" opacity=".55"/>
+    <g transform="translate(720,500)">
+      <rect x="-26" y="-6" width="52" height="44" rx="4" fill="#1a2c3f" stroke="#2c4a66"/>
+      <path d="M0,-44 C14,-24 22,-14 14,2 C26,-6 24,-26 14,-40 C20,-20 8,-14 0,-30 C-6,-14 -16,-18 -12,-36 C-22,-22 -20,-4 -8,4 C-18,-10 -10,-30 0,-44 Z" fill="url(#furn)"/>
+      <path d="M0,-30 C8,-18 10,-10 5,2 C12,-4 11,-16 5,-26 C8,-14 2,-10 0,-20 C-3,-10 -9,-12 -7,-22 C-12,-14 -11,-2 -4,4 C-10,-6 -6,-20 0,-30 Z" fill="#ffd98a"/>
+    </g>
+    <!-- banner poles -->
+    <g stroke="#2c4a66" stroke-width="2">
+      <line x1="600" y1="510" x2="600" y2="430"/><line x1="840" y1="510" x2="840" y2="430"/>
+    </g>
+    <path d="M600,430 L632,440 L600,452 Z" fill="#ff8a3d" opacity=".8"/>
+    <path d="M840,430 L808,440 L840,452 Z" fill="#5cc8f0" opacity=".8"/>
+  </svg>
+  <canvas id="snow"></canvas>
+  <div class="hero-inner">
+    <div class="wrap">
+      <div class="dossier-stamp">
+        <span class="dot"></span>
+        <span>Alliance Operations Manual</span>
+        <b>Gen 1 · Classified</b>
+      </div>
+      <h1>Hold the <span class="fire">Fire.</span></h1>
+      <div class="sub">LWS Survival Doctrine</div>
+      <p class="lede">Listen up, recruit. The cold doesn't care how strong you think you are — it kills the unprepared first. This manual is everything the veterans of <b>LWS</b> wish someone had told them on Day 1: every event, the weekly rhythm, and the full server timeline laid bare. Read it twice. Then keep your furnace burning and your speedups saved.</p>
+      <div class="telemetry">
+        <div><div class="k">State Phase</div><div class="v cold">Gen 1</div></div>
+        <div><div class="k">Posture</div><div class="v warm">Build &amp; Survive</div></div>
+        <div><div class="k">Alliance</div><div class="v go">[LWS]</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============== TIMELINE ============== -->
+<section class="block" id="timeline">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Section 01 — The Long Road</span>
+      <h2>The State Timeline</h2>
+      <p>Every state in this game is born on Day 0 and ages on a fixed schedule. Heroes, pets, Fire Crystals, the big war events — they all unlock on the clock, the same way on every server. Drag the ember through the ice core below to see exactly what your state looks like at any age, and what's coming next.</p>
+    </div>
+
+    <div class="core">
+      <div class="core-readout">
+        <div class="ro-left">
+          <div class="ro-day">
+            <span class="big" id="dayNum">0</span>
+            <span class="lbl">State Day<br>≈ Server Age</span>
+          </div>
+          <div id="eraName">The Thaw</div>
+          <div id="eraDesc">Day zero. A fresh state, a cold furnace, and a few survivors. Everyone starts here.</div>
+        </div>
+        <div class="ro-right">
+          <div class="stat-row">
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="1.6"><path d="M12 3c2 3 4 4.5 4 8a4 4 0 0 1-8 0c0-3.5 2-5 4-8z"/><path d="M12 9c1 1.4 1.6 2 1.6 3.4a1.6 1.6 0 0 1-3.2 0c0-1.4.6-2 1.6-3.4z" fill="#ffc24d" stroke="none"/></svg>
+            </div>
+            <div class="info"><div class="t">Hero Generation</div><div class="d" id="heroGen">Gen 1 <small id="heroNames">Natalia · Jeronimo · Molly · Zinman</small></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5cc8f0" stroke-width="1.6"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z"/></svg>
+            </div>
+            <div class="info"><div class="t">Combat Systems</div><div class="d" id="combatSys">Foundation <small id="combatSub">Basic troops &amp; rallies</small></div></div>
+          </div>
+          <div class="stat-row">
+            <div class="badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#54f0b8" stroke-width="1.6"><path d="M12 3 5 7v6l7 4 7-4V7l-7-4z"/><path d="M12 3v18M5 7l14 8M19 7 5 15"/></svg>
+            </div>
+            <div class="info"><div class="t">Pets / Crystals</div><div class="d" id="petFc">Locked <small id="petFcSub">Unlocks Day 54+</small></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="core-track">
+        <div class="track-meta">
+          <span class="eyebrow">Drag to scrub state age — 0 to 1160 days</span>
+          <span id="nextUp">↗ Next: Gen 2 Heroes at Day 40</span>
+        </div>
+        <div class="slider-shell">
+          <div class="ticks" id="ticks"></div>
+          <input type="range" id="slider" min="0" max="1160" value="0" step="1" aria-label="State age in days">
+        </div>
+        <div class="track-legend">
+          <span><i style="background:#ff8a3d"></i> Hero Gen</span>
+          <span><i style="background:#54f0b8"></i> Pets</span>
+          <span><i style="background:#5cc8f0"></i> Fire Crystals</span>
+          <span><i style="background:#ffc24d"></i> Major Event / System</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EVENTS ============== -->
+<section class="block" id="events">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Section 02 — The Manual</span>
+      <h2>Events</h2>
+      <p>Every event in the game, in one place. Use the <b style="color:var(--glacier)">Events &#9662;</b> menu up top from anywhere on the page, or pick from the shelves below. Each one opens a full field guide &mdash; how it works step by step, which heroes to bring, troop ratios, and how LWS moves as a unit. The full text directory of all events sits at the bottom.</p>
+    </div>
+    <div id="eventsLanding"></div>
+    <div class="idx-divider">
+      <span class="eyebrow">Full Directory</span>
+      <h3>Every Event, Indexed</h3>
+      <p>The complete roster as a quick-scan directory. <span style="color:var(--ember)">&#9733;</span> marks events with a deep field guide; tap any row to open its page.</p>
+    </div>
+    <div id="eventsIndex"></div>
+  </div>
+</section>
+
+<!-- ============== RANKS ============== -->
+<section class="block" id="ranks">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Section 03 — Chain of Command</span>
+      <h2>Alliance Ranks</h2>
+      <p>R1 to R5. Most of it is prestige, not power — but the difference between an R1 and an R4 is the difference between a passenger and a driver. Here's what each rank actually does, and where the real authority lives.</p>
+    </div>
+    <div class="ranks">
+      <div class="rank r5">
+        <div class="rk">R5</div>
+        <div class="rb"><div class="rt">The Leader</div><p>Full control. Builds the HQ, sets the banner, names and disbands, runs diplomacy. There's exactly one. Heads up: if an R5 goes dark for <b>3 days</b>, the R4s can launch a takeover — that's how dead alliances get inherited on older states.</p></div>
+      </div>
+      <div class="rank r4">
+        <div class="rk">R4</div>
+        <div class="rb"><div class="rt">Senior Officer — The Engine</div><p>The real workhorses. Kick, promote, start alliance tech, place banners, post the bulletin, set event times, and lead rallies. In most alliances an R4 carries the same load as the R5. <b>This is where leadership actually happens.</b></p></div>
+      </div>
+      <div class="rank r3">
+        <div class="rk">R3</div>
+        <div class="rb"><div class="rt">Officer</div><p>Can promote and demote R1s and R2s. Often used to recognise your most active, trusted members — the ones allowed to ping @All. Limited slots, so it carries some weight.</p></div>
+      </div>
+      <div class="rank r2">
+        <div class="rk">R2</div>
+        <div class="rb"><div class="rt">Trusted Member</div><p>Functionally identical to R3 in permissions. A marker that you've proven yourself active and reliable. No tangible perks over R1 beyond standing.</p></div>
+      </div>
+      <div class="rank r1">
+        <div class="rk">R1</div>
+        <div class="rb"><div class="rt">Recruit</div><p>Entry rank. Chat, contribute to tech, tap helps, view profiles, and leave if you want. Be warned — if the alliance has to cut deadweight, <b>R1s are first on the chopping block.</b> Stay active and you won't be one for long.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== GLOSSARY ============== -->
+<section class="block" id="gloss">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Section 04 — Talk the Talk</span>
+      <h2>Field Glossary</h2>
+      <p>Alliance chat moves fast and nobody spells things out. Here's the shorthand you'll hear every day.</p>
+    </div>
+    <div class="gloss" id="gloss-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="stamp">Property of [LWS] · Stay Warm</div>
+    <p>
+      LWS Field Manual — an unofficial player guide for Whiteout Survival.<br>
+      Timeline, events &amp; mechanics compiled from community sources incl. the Whiteout Survival Wiki and event guides. Day values are approximate and vary slightly by state.<br>
+      Whiteout Survival is © Century Games. This guide is fan-made and not affiliated with or endorsed by the developer.
+    </p>
+  </div>
+</footer>
+</div><!--/home-->
+
+<div id="eventPage" class="event-page" hidden></div>
+
+<script>
+/* ============================================================
+   SNOW (hero only, capped, reduced-motion aware)
+   ============================================================ */
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const cv = document.getElementById('snow');
+  const hero = document.querySelector('.hero');
+  const ctx = cv.getContext('2d');
+  let W, H, flakes=[];
+  function size(){
+    W = cv.width = hero.offsetWidth;
+    H = cv.height = hero.offsetHeight;
+    const n = Math.min(90, Math.floor(W/16));
+    flakes = Array.from({length:n}, ()=>({
+      x:Math.random()*W, y:Math.random()*H,
+      r:Math.random()*1.8+.4, s:Math.random()*.6+.2,
+      d:Math.random()*0.6-0.3, o:Math.random()*.5+.2
+    }));
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(const f of flakes){
+      ctx.beginPath();
+      ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(220,234,245,'+f.o+')';
+      ctx.fill();
+      f.y += f.s; f.x += f.d;
+      if(f.y>H){f.y=-4;f.x=Math.random()*W;}
+      if(f.x>W)f.x=0; if(f.x<0)f.x=W;
+    }
+    requestAnimationFrame(draw);
+  }
+  size(); draw();
+  window.addEventListener('resize', size);
+})();
+
+/* ============================================================
+   STATE TIMELINE DATA
+   ============================================================ */
+const HERO_GENS = [
+  {day:0,   names:"Natalia · Jeronimo · Molly · Zinman"},
+  {day:40,  names:"Flint · Philly · Alonso"},
+  {day:120, names:"Logan · Mia · Greg"},
+  {day:195, names:"Ahmose · Reina · Lynn"},
+  {day:270, names:"Hector · Nora · Gwen"},
+  {day:360, names:"Wu Ming · Renee · Wayne"},
+  {day:440, names:"Edith · Gordon · Bradley"},
+  {day:520, names:"Gatot · Sonya · Hendrik"},
+  {day:600, names:"Magnus · Fred · Xura"},
+  {day:680, names:"Gregory · Freya · Blanchette"},
+  {day:760, names:"Eleonora · Lloyd · Rufus"},
+  {day:840, names:"Hervor · Karol · Ligeia"},
+  {day:920, names:"Gisela · Flora · Vulcanus"},
+  {day:1000,names:"Elif · Dominic · Cara"},
+  {day:1080,names:"Hank · Estrella · Viveca"},
+  {day:1160,names:"Seigel · Ursar · Aisling"}
+];
+
+// Eras for the readout
+const ERAS = [
+  {from:0,   name:"The Thaw",          desc:"Day zero. A fresh state, a cold furnace, and a few survivors. Build, join an alliance at Furnace 7, and learn the Bear."},
+  {from:40,  name:"First Expansion",   desc:"Gen 2 heroes arrive and Legendary Hero Gear unlocks. The state's hierarchy starts forming — pick a strong alliance now."},
+  {from:53,  name:"The Castle Era",    desc:"Sunfire Castle opens. Pets arrive (Day 54). The state elects its first President — real politics begin."},
+  {from:60,  name:"The Crystal Dawn",  desc:"The Fire Crystal Age unlocks via the 'Road to Recovery' monument. Furnace 30+ players begin the long crystal climb."},
+  {from:80,  name:"The War Era",       desc:"State of Power (SvS) and King of Icefield go live. This is where states are made and broken. Save everything for prep."},
+  {from:120, name:"The Growth Era",    desc:"Gen 3 heroes, Experts, the VIP Prestige Shop and Vision of Dawn. The grind deepens; specialists enter the field."},
+  {from:150, name:"Fire Crystal 5",    desc:"Fire Crystal Lv.5 and the Laboratory unlock. Crystal refining becomes a daily ritual for serious players."},
+  {from:195, name:"The Ascension",     desc:"Gen 4 heroes land, Gina's Revenge becomes Hero's Mission, and the shard economy shifts to newer heroes. War Academy is near."},
+  {from:220, name:"War Academy",       desc:"The War Academy and FC Lab 5 unlock. Endgame troop tech opens up — power curves start to spike hard."},
+  {from:270, name:"The Crystal Wars",  desc:"Gen 5+ heroes and escalating Fire Crystal tiers. The top of the state is now a different game entirely."},
+  {from:315, name:"Fire Crystal 8",    desc:"FC8 unlocks and daily missions double Fire Crystal output (10× → 20×). The rich get richer; stay disciplined."},
+  {from:500, name:"The Titan Age",      desc:"Fire Crystal 10 and Gen 8+ heroes. Veterans only. Everything you saved on Day 1 echoes here."}
+];
+
+// Ticks shown on the slider (curated milestones)
+const TICKS = [
+  {day:0,    label:"Gen 1",  cls:"hero-gen"},
+  {day:53,   label:"Castle"},
+  {day:80,   label:"SvS"},
+  {day:120,  label:"Gen 3", cls:"hero-gen"},
+  {day:195,  label:"Gen 4", cls:"hero-gen"},
+  {day:270,  label:"Gen 5", cls:"hero-gen"},
+  {day:360,  label:"Gen 6", cls:"hero-gen"},
+  {day:500,  label:"FC10"},
+  {day:680,  label:"Gen 10",cls:"hero-gen"},
+  {day:1160, label:"Gen 16",cls:"hero-gen"}
+];
+
+// Milestone markers for "what's live / next" lookups
+const MILES = [
+  {day:0,   t:"Gen 1 Heroes"},
+  {day:5,   t:"Bear Trap (Furnace 5)"},
+  {day:7,   t:"Alliances unlock (Furnace 7)"},
+  {day:40,  t:"Gen 2 Heroes + Legendary Hero Gear"},
+  {day:53,  t:"Sunfire Castle"},
+  {day:54,  t:"Pet Generation 1"},
+  {day:60,  t:"Fire Crystal Age"},
+  {day:80,  t:"State of Power (SvS) + KOI"},
+  {day:90,  t:"Pet Generation 2"},
+  {day:120, t:"Gen 3 Heroes + Experts + VIP Prestige"},
+  {day:140, t:"Pet Generation 3"},
+  {day:150, t:"Fire Crystal 5 + Laboratory"},
+  {day:180, t:"Legendary Chief Gear"},
+  {day:195, t:"Gen 4 Heroes + Hero's Mission"},
+  {day:200, t:"Pet Generation 4"},
+  {day:220, t:"War Academy + FC Lab 5"},
+  {day:270, t:"Gen 5 Heroes"},
+  {day:315, t:"Fire Crystal 8 (20× daily FC)"},
+  {day:360, t:"Gen 6 Heroes"},
+  {day:440, t:"Gen 7 Heroes"},
+  {day:500, t:"Fire Crystal 10"},
+  {day:520, t:"Gen 8 Heroes"},
+  {day:600, t:"Gen 9 Heroes"},
+  {day:680, t:"Gen 10 + Flame Tech T12"},
+  {day:760, t:"Gen 11 Heroes"},
+  {day:840, t:"Gen 12 Heroes"},
+  {day:920, t:"Gen 13 Heroes"},
+  {day:1000,t:"Gen 14 Heroes"},
+  {day:1080,t:"Gen 15 Heroes"},
+  {day:1160,t:"Gen 16 Heroes"}
+];
+
+const MAXDAY = 1160;
+const slider   = document.getElementById('slider');
+const dayNum   = document.getElementById('dayNum');
+const eraName  = document.getElementById('eraName');
+const eraDesc  = document.getElementById('eraDesc');
+const heroGen  = document.getElementById('heroGen');
+const heroNames= document.getElementById('heroNames');
+const combatSys= document.getElementById('combatSys');
+const combatSub= document.getElementById('combatSub');
+const petFc    = document.getElementById('petFc');
+const petFcSub = document.getElementById('petFcSub');
+const nextUp   = document.getElementById('nextUp');
+
+// build ticks
+const ticksEl = document.getElementById('ticks');
+TICKS.forEach(t=>{
+  const el=document.createElement('div');
+  el.className='tick'+(t.cls?' '+t.cls:'');
+  el.style.left=(t.day/MAXDAY*100)+'%';
+  el.innerHTML='<div class="nub"></div><div class="ti">'+t.label+'</div>';
+  el.addEventListener('click',()=>{ slider.value=t.day; update(); });
+  ticksEl.appendChild(el);
+});
+
+function curGen(day){
+  let g=HERO_GENS[0], idx=0;
+  HERO_GENS.forEach((h,i)=>{ if(day>=h.day){g=h;idx=i;} });
+  return {gen:idx+1, names:g.names};
+}
+function combatFor(day){
+  if(day>=315) return ["Crystal-tier","Fire Crystal 8+ · refined upgrades"];
+  if(day>=220) return ["War Academy","Endgame troop tech online"];
+  if(day>=150) return ["Fire Crystal 5","Crystal Lab refining"];
+  if(day>=80)  return ["Cross-State War","SvS &amp; KOI live"];
+  if(day>=60)  return ["Fire Crystal Age","Furnace 30+ enhancement"];
+  if(day>=53)  return ["Castle Battle","President &amp; ministers"];
+  if(day>=40)  return ["Legendary Gear","Hero gear tier 1"];
+  return ["Foundation","Basic troops &amp; rallies"];
+}
+function petFcFor(day){
+  if(day>=500) return ["Fire Crystal 10","Endgame crystal tier"];
+  if(day>=315) return ["FC8 · Pet Gen 5","20× daily Fire Crystals"];
+  if(day>=200) return ["Pet Gen 4","Cave Lion · Snow Ape"];
+  if(day>=140) return ["Pet Gen 3","Snow Leopard · Giant Elk"];
+  if(day>=90)  return ["Pet Gen 2","Titan Roc · Giant Tapir"];
+  if(day>=60)  return ["FC Age · Pet Gen 1","Crystals + first pets"];
+  if(day>=54)  return ["Pet Gen 1","Cave Hyena · Arctic Wolf · Musk Ox"];
+  return ["Locked","Unlocks Day 54+"];
+}
+function curEra(day){
+  let e=ERAS[0]; ERAS.forEach(x=>{ if(day>=x.from)e=x; }); return e;
+}
+function nextMile(day){
+  for(const m of MILES){ if(m.day>day) return m; }
+  return null;
+}
+
+function update(){
+  const day=+slider.value;
+  dayNum.textContent=day;
+  const e=curEra(day);
+  eraName.textContent=e.name;
+  eraDesc.textContent=e.desc;
+  const g=curGen(day);
+  heroGen.innerHTML='Gen '+g.gen+' <small>'+g.names+'</small>';
+  const c=combatFor(day);
+  combatSys.innerHTML=c[0]+' <small>'+c[1]+'</small>';
+  const p=petFcFor(day);
+  petFc.innerHTML=p[0]+' <small>'+p[1]+'</small>';
+  const nm=nextMile(day);
+  nextUp.textContent = nm ? ('↗ Next: '+nm.t+' at Day '+nm.day) : '✓ State fully matured — endgame';
+  // tint the day number warmer as the state ages
+  const warmth = Math.min(1, day/1160);
+  dayNum.style.color = `rgb(255, ${Math.round(138 - warmth*40)}, ${Math.round(61 - warmth*30)})`;
+}
+slider.addEventListener('input', update);
+update();
+
+/* ============================================================
+   EVENTS — ICONS, CATALOG, GUIDES, READER
+   ============================================================ */
+const ICONS = {
+  bear:`<svg viewBox="0 0 32 32" fill="none" stroke="#ffc24d" stroke-width="1.5"><circle cx="9" cy="8" r="3"/><circle cx="23" cy="8" r="3"/><path d="M16 9c-5 0-9 4-9 9 0 4 4 6 9 6s9-2 9-6c0-5-4-9-9-9z"/><circle cx="13" cy="17" r="1.2" fill="#ffc24d" stroke="none"/><circle cx="19" cy="17" r="1.2" fill="#ffc24d" stroke="none"/><path d="M16 20c-1 1.5-3 1.5-4 0M16 20c1 1.5 3 1.5 4 0"/></svg>`,
+  joe:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff5168" stroke-width="1.5"><path d="M16 4 6 9v7c0 6 4 9 10 12 6-3 10-6 10-12V9L16 4z"/><path d="M12 15l3 3 5-6"/></svg>`,
+  mob:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><rect x="5" y="7" width="22" height="4" rx="1"/><rect x="5" y="14" width="16" height="4" rx="1"/><rect x="5" y="21" width="20" height="4" rx="1"/><path d="M24 16l2 2 4-4" stroke="#ffc24d"/></svg>`,
+  champ:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><path d="M9 5h14v5a7 7 0 0 1-14 0V5z"/><path d="M9 7H5v2a4 4 0 0 0 4 4M23 7h4v2a4 4 0 0 1-4 4"/><path d="M13 17v4h6v-4M11 25h10"/></svg>`,
+  fort:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff5168" stroke-width="1.5"><path d="M5 11V6h4v3h3V6h4v3h3V6h4v5"/><path d="M5 11h22v15H5z"/><path d="M13 26v-7h6v7"/></svg>`,
+  mine:`<svg viewBox="0 0 32 32" fill="none" stroke="#5cc8f0" stroke-width="1.5"><path d="M14 4l-3 6 5 3 4-7-6-2z"/><path d="M16 13 8 28M16 13l-3-4"/><path d="M6 26l4 2"/></svg>`,
+  foundry:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff5168" stroke-width="1.5"><path d="M6 26V14l6 4V14l6 4V8l8 4v14H6z"/><path d="M11 26v-4h4v4"/></svg>`,
+  canyon:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff5168" stroke-width="1.5"><path d="M4 22 11 9l4 7 4-10 5 16"/><path d="M4 22h24M16 22v6"/><circle cx="16" cy="6" r="2" fill="#ff5168" stroke="none"/></svg>`,
+  svs:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff8a3d" stroke-width="1.5"><path d="M6 6l5 1 9 9-4 4-9-9-1-5z"/><path d="M26 6l-5 1-4 4M20 20l4 4 2-2-4-4M14 18l-8 8 2 2 8-8"/></svg>`,
+  koi:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><path d="M16 3l3 6 6 1-4 5 1 6-6-3-6 3 1-6-4-5 6-1 3-6z"/></svg>`,
+  showdown:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><circle cx="16" cy="16" r="11"/><path d="M16 5v22M5 16h22" opacity=".4"/><path d="M16 9l2 5 5 .5-4 3.5 1.5 5L16 25l-4.5 3 1.5-5-4-3.5 5-.5z" fill="#54f0b8" stroke="none" opacity=".25"/></svg>`,
+  castle:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff8a3d" stroke-width="1.5"><path d="M5 27V12l4 2V9l4 2V8l3-3 3 3v3l4-2v5l4-2v15H5z"/><path d="M13 27v-6h6v6"/><circle cx="16" cy="14" r="1.5" fill="#ff8a3d" stroke="none"/></svg>`,
+  hoc:`<svg viewBox="0 0 32 32" fill="none" stroke="#ffc24d" stroke-width="1.5"><path d="M6 28V17h5v11M13 28V10h6v18M21 28V14h5v14"/><path d="M13 6l3 2 3-2 1 4h-8z" fill="#ffc24d" stroke="none"/></svg>`,
+  kill:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff5168" stroke-width="1.5"><path d="M6 6l12 12M10 20l-4 4 2 2 4-4M6 8l2-2"/><path d="M26 6L14 18M22 20l4 4-2 2-4-4M26 8l-2-2"/></svg>`,
+  dragon:`<svg viewBox="0 0 32 32" fill="none" stroke="#5cc8f0" stroke-width="1.5"><path d="M6 19c0-5 4-9 10-9 3 0 6 1 8 3l3-2-1 4c1 2 1 4 0 6-3 5-9 6-14 4"/><circle cx="12" cy="16" r="1" fill="#5cc8f0" stroke="none"/><path d="M24 11l3-3M9 25l3-4"/></svg>`,
+  merc:`<svg viewBox="0 0 32 32" fill="none" stroke="#ffc24d" stroke-width="1.5"><circle cx="16" cy="12" r="7"/><path d="M16 8l1.4 2.8 3 .4-2.2 2.1.5 3-2.7-1.4-2.7 1.4.5-3-2.2-2.1 3-.4z" fill="#ffc24d" stroke="none"/><path d="M11 19l-2 9 7-3 7 3-2-9"/></svg>`,
+  laby:`<svg viewBox="0 0 32 32" fill="none" stroke="#5cc8f0" stroke-width="1.5"><rect x="5" y="5" width="22" height="22" rx="1"/><path d="M5 11h11v11M11 27V16h11M16 5v6h6"/></svg>`,
+  hoh:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><circle cx="16" cy="11" r="5"/><path d="M16 8l1 2 2 .3-1.5 1.4.4 2L16 12.7l-1.9 1 .4-2L13 10.3l2-.3z" fill="#54f0b8" stroke="none"/><path d="M7 28c0-5 4-8 9-8s9 3 9 8"/></svg>`,
+  beasts:`<svg viewBox="0 0 32 32" fill="none" stroke="#ff8a3d" stroke-width="1.5"><ellipse cx="16" cy="19" rx="5" ry="4.5"/><circle cx="9" cy="12" r="2"/><circle cx="15" cy="9" r="2"/><circle cx="22" cy="12" r="2"/></svg>`,
+  mission:`<svg viewBox="0 0 32 32" fill="none" stroke="#ffc24d" stroke-width="1.5"><rect x="7" y="6" width="18" height="22" rx="2"/><path d="M11 13h10M11 18h10M11 23h6"/><path d="M12 4h8v4h-8z"/></svg>`,
+  hero:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><circle cx="16" cy="11" r="5"/><path d="M7 27c0-5 4-8 9-8s9 3 9 8"/><path d="M16 8.5l.8 1.6 1.7.2-1.3 1.2.3 1.7-1.5-.8-1.5.8.3-1.7-1.3-1.2 1.7-.2z" fill="#54f0b8" stroke="none"/></svg>`,
+  target:`<svg viewBox="0 0 32 32" fill="none" stroke="#5cc8f0" stroke-width="1.5"><circle cx="16" cy="16" r="11"/><circle cx="16" cy="16" r="6.5"/><circle cx="16" cy="16" r="2" fill="#5cc8f0" stroke="none"/></svg>`,
+  tundra:`<svg viewBox="0 0 32 32" fill="none" stroke="#9fe9c8" stroke-width="1.5"><path d="M16 4v24M6 10l20 12M26 10 6 22"/><path d="M16 4l-3 3 3 3 3-3M16 28l-3-3 3-3 3 3"/></svg>`,
+  gift:`<svg viewBox="0 0 32 32" fill="none" stroke="#b69cff" stroke-width="1.5"><rect x="6" y="13" width="20" height="13" rx="1"/><path d="M5 9h22v4H5zM16 9v17"/><path d="M16 9c-3-5-8-3-6 0M16 9c3-5 8-3 6 0"/></svg>`,
+  wheel:`<svg viewBox="0 0 32 32" fill="none" stroke="#54f0b8" stroke-width="1.5"><circle cx="16" cy="16" r="11"/><path d="M16 5v22M5 16h22M8 8l16 16M24 8 8 24" opacity=".45"/><circle cx="16" cy="16" r="2" fill="#54f0b8" stroke="none"/></svg>`
+};
+
+const CATS=[
+  {key:"war",    name:"Combat & Alliance War",     accent:"#ff5168"},
+  {key:"cross",  name:"Cross-State & State Power",  accent:"#ff8a3d"},
+  {key:"hero",   name:"Hero & Shard Events",        accent:"#54f0b8"},
+  {key:"solo",   name:"Solo Growth & Resource",     accent:"#5cc8f0"},
+  {key:"mission",name:"City, Tech & Task Missions",  accent:"#ffc24d"},
+  {key:"tundra", name:"Tundra & Trading",           accent:"#9fe9c8"},
+  {key:"season", name:"Seasonal, Skins & Packs",    accent:"#b69cff"}
+];
+
+const EVENTS = [
+
+/* ---------------- COMBAT & ALLIANCE WAR ---------------- */
+{id:"bear",icon:"bear",cat:"war",name:"Bear Trap",type:"Alliance · PvE Rally",cadence:"Every ~2 days · 30 min",req:"Furnace 5 · in alliance 46h+",duration:"30 min",deep:true,
+ ov:"The bread-and-butter alliance event: officers summon the Raging Bear at the Hunting Trap and the whole alliance has 30 minutes to pile on damage. The Bear never hits back, so it's a pure damage race — and it's won on join discipline, not raw account power. This guide is for every member: how to join right, who to bring, and how to lead a rally if you captain one.",
+ page:[
+  {t:"callout",v:"good",title:"Pure damage — nothing hits back",text:"The Raging Bear never retaliates, so you need zero survivability. Every troop you send is a damage-dealer. It's a 30-minute race to stack damage — best hourly reward rate in the game."},
+  {t:"callout",v:"warn",title:"Rewards are personal now — don't miss it",text:"Since Jan 2025 the old alliance-wide rewards are gone; everything scales off <b>your own damage</b>. And you can only join <b>one trap per two days</b> — trap on Monday and you're free again Wednesday 00:00 UTC. A skipped Bear is a reward you personally forfeit."},
+  {t:"p",h:"What it is",text:"An alliance PvE rally. Officers (R4+) activate the Hunting Trap; you must have been in the alliance <b>46+ hours</b> and have <b>Furnace 5</b> to take part. Modern alliances run <b>two traps</b> to cover time zones, but a single player can still only join one per cooldown. Rewards come as <b>Essence Stones and Enhancement XP Components</b> — both feed your Hero Gear — scaling with your personal damage."},
+  {t:"callout",v:"info",title:"This is NOT Beast Day",text:"Bear Trap is a 30-minute boss rally scored on damage. <b>Defeat Nearby Beasts (Beast Day)</b> is a separate 2-day, stamina-based map hunt with Polar Terror rallies. Different event, different prep — don't confuse the two."},
+  {t:"callout",v:"warn",title:"The one rule that decides Bear",text:"A rally's damage is driven almost entirely by the <b>captain's three heroes</b> (all 9 of their expedition skills fire). If you JOIN, the only thing you add to the rally buff is the <b>first expedition skill of your leftmost hero</b> — and only the <b>four highest-level</b> joiner skills are selected. So Bear is won by good captains staying full and joiners not wasting those four slots. Discipline &gt; power."},
+  {t:"table",h:"Trap Enhancement — free damage for everyone",cols:["Level","Arrowheads","Attack vs Bear"],widths:["1fr","1.4fr","1.4fr"],rows:[
+    ["1","150","+5%"],["2","200","+10%"],["3","250","+15%"],["4","300","+20%"],["5","300","<b>+25%</b>"]]},
+  {t:"p",text:"Officers fill this before the hunt with <b>Explosive Arrowheads</b> (from Intel Missions / looting map beasts). It <b>resets each session</b> and each trap tracks its own progress, so it must be refilled every time. Donating also pays 200 Alliance Tokens per arrowhead. Max is +25% troop attack against the Bear — far too big to skip."},
+
+  {t:"p",h:"Your job as a joiner",text:"Most members join rather than captain, and the job is simple but disciplined: <b>(1) be ready before the start, (2) join the best rallies fast, and (3) never poison a rally with the wrong leftmost hero.</b> Do those three and you've done your part — no need to chase raw power."},
+  {t:"callout",v:"warn",title:"Only your LEFTMOST hero's first skill counts",text:"When you join, put your best Bear buffer in the <b>far-left slot</b> — only that hero's first expedition skill feeds the rally. Fill the other two slots with your highest-level heroes just to carry more troops. Your gear, charms, Chief Gear and pets do <b>nothing</b> for the rally's shared buff — a plain Jessie beats a mythic-geared wrong hero every time."},
+  {t:"table",h:"Best joiner heroes",cols:["Hero","Their 1st skill","When to use"],widths:["0.8fr","1.5fr","1.5fr"],rows:[
+    ["<b>Jessie</b>","+25% damage to all troops (flat, no RNG)","The gold standard — always your first choice, far-left."],
+    ["<b>Jasser</b>","+25% damage to all troops (flat)","Identical to Jessie — effectively your second Jessie."],
+    ["<b>Seo-yoon</b>","+25% troop attack (flat)","Top-tier when your damage-buff heroes are already out."],
+    ["<b>Jeronimo</b>","+25% flat damage","S-tier joiner too — but usually better saved to CAPTAIN if you own him."],
+    ["Bradley","boosts attack (newest-gen marksman)","Strong attack buffer on later-gen states."],
+    ["Lynn","like 2× Jessie when it procs","Great, but RNG — and doesn't stack with another Lynn in the same rally."],
+    ["Wayne","makes heavy-marksman rallies hit twice","Excellent inside marksman-heavy rallies."]]},
+  {t:"check",h:"Joiner prep checklist",items:[
+    "Be in the alliance <b>46+ hours</b>, or you can't participate.",
+    "Heal your wounded troops beforehand so you can deploy your maximum.",
+    "Recall gatherers and free up your marches before the 30-minute window.",
+    "Save your formations in advance — a Jessie/Jasser/Seo-yoon joiner set AND a 'filler' set.",
+    "Reposition or teleport close to the trap — shorter march = more rally cycles.",
+    "Read the officer's captain list and join rules before the gun."]},
+  {t:"steps",h:"During the event — the join sequence",items:[
+    "Stay inside the <b>rally list window</b> and use the big green join button there — it's faster than reacting to chat popups.",
+    "Load your saved Jessie formation and join the <b>strongest posted captain</b>.",
+    "Watch your return time. When your troops come home, check: is your best joiner hero still free?",
+    "<b>If YES</b> — join the next strong captain again with your correct leftmost hero.",
+    "<b>If NO</b> (Jessie's already out in another rally) — join with a low-skill filler hero or troops only, so you don't overwrite someone's good buff.",
+    "Keep rejoining fast for the full 30 minutes — more cycles = more personal damage."]},
+  {t:"decision",h:"The joiner decision — memorise this",nodes:[
+    {k:"start",t:"Bear starts"},
+    {k:"act",t:"Open the rally list"},
+    {k:"act",t:"Load your saved Jessie formation"},
+    {k:"act",t:"Join the strongest posted captain"},
+    {k:"act",t:"Troops return &mdash; check your heroes"},
+    {k:"q",t:"Is your best joiner hero (Jessie) still free?",yes:"Join the next strong captain with your correct leftmost hero.",no:"Use a low-skill filler hero or troops only &mdash; don't overwrite a better buff."},
+    {k:"end",t:"Keep cycling for 30 min"}]},
+  {t:"callout",v:"info",title:"Save four formations",text:"A disciplined joiner keeps FOUR saved formations: one with your best buffer (Jessie) far-left, one captain formation (in case you start an overflow rally), and TWO <b>filler</b> formations that lead with a low-level (blue / level 1–4 first-skill) hero. Filler lets you keep sending troops <b>without</b> bumping someone else's level-5 Jessie out of the four buff slots."},
+  {t:"cases",h:"Joiner emergencies",items:[
+    {if:"You sent the wrong level-5 hero first.",do:"Stop repeating it, tell the captain, and switch to a correct or filler formation next march. A wrong level-5 first skill can lock a buff slot until the captain removes you — R4/R5 can't remove players from someone else's Bear rally."},
+    {if:"All your best joiner heroes are already out.",do:"Send a low-skill filler or troops only — never a bad level-5 skill that hijacks a slot."},
+    {if:"You're far from the trap.",do:"Reposition closer if your alliance allows it — faster travel means more rally cycles."},
+    {if:"It's the last few minutes.",do:"Pile onto the tested strong captains, not a friend's vanity rally."},
+    {if:"Your city is shielded.",do:"You can still join — the shield isn't removed."}]},
+  {t:"scripts",h:"Clean joiner calls",items:[
+    {title:"USING JESSIE",lines:["Jessie march out — joining main captain only."]},
+    {title:"GOING FILLER",lines:["Jessie's out. Next march is filler so I don't overwrite."]},
+    {title:"MY BAD",lines:["Wrong hero sent by mistake — switching to filler next rally."]},
+    {title:"REPOSITIONING",lines:["Too far from the trap — moving closer for faster turnover."]}]},
+
+  {t:"p",h:"If you're captaining a rally",text:"A captain's damage IS the rally's damage, so this is where the real optimisation lives. All <b>three</b> of your heroes' expedition skills fire (up to 9 buffs). You want flat attack, damage-dealt and lethality skills — avoid stun, stamina-cut and heavy-RNG. Keep at least one of each troop type in the march so all three heroes' skills switch on. Position close to the trap and space your calls so a rally lands on the Bear roughly every 30 seconds."},
+  {t:"table",h:"Best captain heroes (cross-generation)",cols:["Hero","Why it captains well"],widths:["0.7fr","2fr"],rows:[
+    ["<b>Jeronimo</b>","+25% troop damage & +25% attack, periodic +30% damage, +15% rally-attack widget — the recurring top anchor across generations."],
+    ["<b>Natalia</b>","+25% attack and +25% damage plus damage-taken reduction — best-in-Gen-3 and the pick when her widgets/stars outpace Jeronimo."],
+    ["<b>Mia</b>","Chance to raise a target's damage-taken up to +50% plus team damage — stapled into most mid/late captain cores."],
+    ["<b>Alonso</b>","Up to +50% troop-damage chance, lethality, and a rally-lethality widget — a strong early-mid marksman amplifier."],
+    ["Hector","(2026) top F2P infantry lead — two damage skills that work for marksmen; effectively replaces Flint."],
+    ["Lynn / Gwen / Bradley","Mid-to-late marksman damage options — newest-gen marksmen bring the highest base stats, so don't overthink the third slot."]]},
+  {t:"table",h:"Captain cores by state age",cols:["State age","Captain core","Ratio (I/L/M)"],widths:["1fr","1.7fr","0.9fr"],rows:[
+    ["Early Gen 1–2","Jeronimo/Natalia + Molly/Philly + Alonso/Bahiti","3/3/4 or 2/3/5"],
+    ["F2P early","Sergey/Flint (or Hector) + Molly + Bahiti","3/3/4"],
+    ["Gen 3","Natalia + Mia + Alonso","1/2/7"],
+    ["Mid–late","Jeronimo + Mia + best marksman (Bradley…)","1/2/7 → 1/1/8"],
+    ["Late / FC","Hector + Mia + Bradley (F2P) · Jeronimo + Mia + Bradley (spender)","1/1/8"]]},
+  {t:"ratios",h:"Troop ratio — lead with Marksmen (captains)",items:[
+    {label:"Early stable account",r:[30,30,40]},
+    {label:"Midgame mature account",r:[10,20,70]},
+    {label:"Late / mature widgets (1/1/8)",r:[10,10,80]}]},
+  {t:"p",text:"Marksmen have the highest attack and lethality, so Bear ratios trend marksman-heavy as your troop pool grows (toward 1/1/8). But keep at least <b>~5,000 Infantry</b> — there's a damage mechanic tied to a minimum front line — and always include at least 1 of each type so all three captain skills activate. There's no universal perfect ratio: check your march's <b>Lethality</b> on the day and nudge toward whichever of Marksman/Lancer has the higher lethality (test 1–5% shifts)."},
+  {t:"p",h:"Gear, widgets & pets (captains)",text:"Prioritise mythic hero <b>headgear and boots first</b> (they give lethality), then Chief Gear for attack/defense and Chief Charms for lethality/health. Widgets scale hard as the state ages and can flip which of two similar cores is better. Invest in your best combat pet — and if march turnover is your bottleneck, <b>Snow Leopard's Lightning Raid</b> (+up to 30% march speed) is huge; as of 2026 Gina and Lumak's march-speed buffs work in Bear rallies too. If your best marksman gear is parked on Gina for Beast Day, move it to your real Bear captain marksman first."},
+  {t:"callout",v:"info",title:"Cyrille & Experts",text:"If your state has Experts unlocked, the Expert <b>Cyrille</b> adds Bear-specific bonuses — extra damage points, rally & deployment capacity, Enhancement XP and Essence Stone rewards (up to +5 at max). Worth building if you trap every cycle."},
+
+  {t:"list",h:"The short version — pin this",items:[
+    "Best joiner far-left: <b>Jessie / Jasser / Seo-yoon</b>.",
+    "If your best buffer's already out, use a low-skill filler or troops only — never a wrong level-5 hero.",
+    "Join the tested strong captains; don't start duplicate rallies unless called.",
+    "Move close, keep the rally tab open, and heal beforehand.",
+    "Refill trap enhancement to +25% before the hunt.",
+    "Show up every trap you're eligible for — rewards are personal now."]},
+  {t:"table",h:"Myths to stop repeating",cols:["The myth","The reality"],widths:["1fr","1.4fr"],rows:[
+    ["A strong player joining makes my rally number bigger.","False — joiner troop strength doesn't raise the captain's damage."],
+    ["Joiners should lead with their best-geared hero.","No — only the leftmost hero's first expedition skill matters to the rally."],
+    ["The first four joiners are locked forever.","No — a higher-level skill overwrites a lower one; the danger is a wrong <b>level-5</b> skill, which can't be overwritten."],
+    ["Two traps means I can do both.","No — your personal 2-day cooldown blocks it."],
+    ["Bear Trap is basically Beast Day.","No — Bear is a 30-min boss rally; Beast Day is a 2-day stamina hunt."]]},
+  {t:"rewards",h:"Rewards",items:[
+    "<b>Personal damage bands</b> — the main prize; higher damage = better rewards (alliance-wide rewards were removed Jan 2025).",
+    "<b>Essence Stones</b> and <b>Enhancement XP Components</b> — both feed your Hero Gear upgrades.",
+    "<b>Hunting Achievements</b> — one-time personal-best thresholds.",
+    "200 Alliance Tokens per Explosive Arrowhead you donate to the trap.",
+    "Extra Essence Stone and point rewards from the Expert Cyrille, if unlocked."]},
+  {t:"vet",text:"Bear is the best hourly rate in the game — 30 minutes for a pile of Essence Stones — but it's won on discipline, not power. Heal up, move close, keep the rally tab open, and put Jessie far-left. If she's already out, go filler and don't wreck someone else's buff. Show up every single cycle you're eligible for; the rewards are yours alone now. Simple, repeatable, decisive."}
+ ]},
+
+{id:"joe",icon:"joe",cat:"war",name:"Crazy Joe",type:"Alliance · Defense",cadence:"~Bi-weekly · 40 min",req:"Furnace 7 · in alliance",duration:"40 min · 20 waves",deep:true,
+ ov:"An alliance PvE defense event: 20 waves of bandits hit member cities and the Alliance HQ over about 40 minutes. You score on the <b>percentage of each wave your troops kill</b> — so Crazy Joe is won on participation, tight positioning and clean recall timing, not raw account power. This guide covers the swap-and-empty system, the HQ waves, hero and troop choices, and how to captain a run.",
+ page:[
+  {t:"callout",v:"good",title:"Scored on kills, not survival",text:"Every wave pays out on the share of attackers your troops kill — clear <b>100% of a wave</b> for max points. You also score by <b>reinforcing allies</b>, at roughly half the city-owner rate. So the more troops you have active in more places, the more you score. Nothing here is about surviving a hit — it is a kill race spread across the alliance."},
+  {t:"callout",v:"warn",title:"Three hard rules — break none of them",text:"<b>Shields do NOT stop Joe.</b> <b>Teleporting cancels</b> the event segment you are in. <b>Healing mid-run</b> repopulates your city and steals kills from the allies reinforcing you. Do not do any of the three during the run unless a leader explicitly calls an emergency HQ save."},
+  {t:"p",h:"What it is",text:"An alliance defense event. You need <b>Furnace 7</b> and to be in an alliance; <b>R4/R5 start it</b> and pick the target HQ. Twenty waves run over ~40 minutes, <b>bi-weekly (Tue/Thu)</b> during State of Power, King of Icefield or Hall of Chiefs weeks. Rewards arrive by mail the next day. If your city fails its defense <b>twice</b>, Joe stops attacking you for the rest of that run — but you keep scoring by reinforcing others."},
+  {t:"table",h:"The 20-wave map",cols:["Waves","Target","What to do"],widths:["0.8fr","1.5fr","2.2fr"],rows:[
+    ["1–6","All member cities","Keep your swaps landing on allies; hold coverage, do not reshuffle."],
+    ["<b>7</b> &#9733;","<b>Online members only</b>","Everyone online — this is a double-value wave."],
+    ["8–9","All cities","Hold placements and prepare your HQ recall timing."],
+    ["<b>10</b>","<b>Alliance HQ only</b>","After the wave 9 city hits LAND, recall and send HQ marches."],
+    ["11–13","All cities","Refill your city swaps immediately after HQ defense."],
+    ["<b>14</b> &#9733;","<b>Online members only</b>","Same as wave 7 — stay online."],
+    ["15–16","All cities","Maintain coverage."],
+    ["<b>17</b> &#9733;","<b>Online members only</b>","Same as 7 / 14."],
+    ["18–19","All cities","Do NOT recall early — wait for the wave 19 hits to land."],
+    ["<b>20</b>","<b>Alliance HQ only</b>","Endgame HQ defense with the pre-agreed ratio and heroes."]]},
+  {t:"callout",v:"info",title:"Waves 7 / 14 / 17 are the point engine",text:"These three waves hit <b>only online players</b> and pay roughly <b>double</b> a normal wave. Missing them is the single biggest way a member tanks their own score. Being online for them matters more than any hero or ratio choice you will make all run."},
+  {t:"p",h:"How scoring works",text:"Points scale with the <b>% of a wave killed</b> (kill 70% of a wave, get 70% of that wave value). The <b>city owner</b> scores for their city being defended even if reinforcements do all the killing; <b>reinforcers</b> score for their share of the kills at about <b>half</b> the owner rate. That split is exactly why the whole system is built around emptying your own city and letting reinforcements land the kills."},
+  {t:"callout",v:"warn",title:"Joe attacks your HIGHEST-level HQ",text:"Community-tested: Crazy Joe targets the highest-level HQ. If your alliance has unlocked and placed the <b>Tundra HQ</b>, Joe goes there instead of the Icefield HQ — make sure the HQ you are prepping is the one Joe will actually hit. This is reliable community practice, not official documentation."},
+  {t:"p",h:"The core tactic: swap and empty",text:"The highest-scoring pattern for almost every alliance is <b>troop swapping with empty (or near-empty) home cities</b>. If your own troops sit at home they <b>steal kills</b> from the allies reinforcing you; if your city is empty and your ally march is the true damage source, those defend-and-kill points flow to the reinforcer. So send your infantry and lancers <b>out</b> to reinforce allies, keep your own city empty, and let reinforcements do the work. Use Equalize for fills, and coordinate so nobody is accidentally left undefended."},
+  {t:"check",h:"Member prep checklist",items:[
+    "Be <b>Furnace 7+</b> and in the alliance before the event starts.",
+    "Set your <b>3 strongest heroes as your city DEFENSE heroes</b> on the barricade — their expedition skills buff everyone who reinforces you. Never park a growth hero (e.g. Zinman) here.",
+    "Do your troop swaps <b>early</b>, not at the gun — last-minute swaps are where wrong heroes and bad ratios happen.",
+    "Send <b>infantry</b> (then lancers) to reinforce; keep <b>marksmen home</b> — they barely score unless the frontline collapses.",
+    "Know your job for this run: <b>city support only</b>, or <b>HQ team</b>.",
+    "Activate combat buffs / pets if you will struggle to 100% a wave; stay inside <b>alliance territory</b> for the bonus stats and short march time."]},
+  {t:"steps",h:"During the run — the sequence",items:[
+    "Waves 1–9: keep your reinforcements landing on allies and leave your own city empty.",
+    "Stay <b>online through waves 7, 14 and 17</b> — they only pay online players.",
+    "After the <b>wave 9 city hits LAND</b>, recall your HQ team and send it to the HQ for wave 10.",
+    "After wave 10, <b>immediately redeploy</b> back into city swaps for waves 11–19.",
+    "Do not recall early before wave 19 — <b>wait for the wave 19 city hits to land</b>, then pull the HQ team.",
+    "Wave 20: send the <b>agreed HQ ratio and heroes</b>. If you are not the main lead, send <b>one support hero in slot 1 only</b>."]},
+  {t:"decision",h:"The recall decision — memorise this",nodes:[
+    {k:"start",t:"HQ wave incoming (10 or 20)"},
+    {k:"act",t:"Check the previous all-city wave (9 before 10, 19 before 20)"},
+    {k:"q",t:"Have those city hits LANDED?",yes:"Recall your HQ team and send it to the HQ now.",no:"Wait &mdash; recalling early forfeits city points and can leave allies uncovered."},
+    {k:"act",t:"HQ wave resolves"},
+    {k:"end",t:"After 10 &rarr; redeploy city swaps. After 20 &rarr; heal &amp; read reports."}]},
+  {t:"ratios",h:"Troop ratios — starting points, then test your own",items:[
+    {label:"City reinforcement — infantry do the killing",r:[90,10,0]},
+    {label:"HQ wave 10 — survival bias (low–mid difficulty)",r:[80,20,0]},
+    {label:"HQ wave 20 — defensive doctrine",r:[60,40,0]}]},
+  {t:"callout",v:"info",title:"High-difficulty wave 20 flips to a damage race",text:"On the highest difficulties, HQ wave 20 stops being a survival check and becomes a short <b>burst-damage race</b>. Many top alliances then move wave 20 toward a <b>marksman-heavy or full-marksman</b> HQ with a high-generation damage lead. It only works if <b>every</b> HQ sender coordinates on marksmen — a few infantry marches will break it. There is no official damage formula published, so test your own HQ 20 with battle reports before committing."},
+  {t:"table",h:"Best joiner heroes (slot-1 support)",cols:["Hero","Their 1st expedition skill","When to use"],widths:["0.9fr","1.6fr","1.5fr"],rows:[
+    ["<b>Jessie</b>","+damage dealt to all troops (up to +25%)","The gold-standard support for city reinforcement and most HQ joins."],
+    ["<b>Jasser</b>","+damage dealt to all troops (up to +25%)","Identical effect to Jessie — effectively your second Jessie."],
+    ["<b>Seo-yoon</b>","+troop attack (up to +25%)","Great when your damage-dealt heroes are already committed elsewhere."],
+    ["Sergey","all-troop damage reduction + enemy attack down","Early / low-difficulty city or HQ lead when survival is the limit."],
+    ["Patrick","all-troop Health + all-troop Attack","Early defensive reinforcement / HQ lead alternative."]]},
+  {t:"callout",v:"warn",title:"The reinforcement lead-takeover rule",text:"Community-tested: if your reinforcing march is <b>stronger</b> than the city owner, <b>your</b> stats, pets and all 3 heroes become the active defense; if you are <b>weaker</b>, the owner setup stays primary and you only add your <b>lead hero first expedition skill</b>. So when reinforcing a stronger defender, send one clean support hero in slot 1 and do not try to upgrade their garrison — you can accidentally hijack it. Not officially documented."},
+  {t:"setups",h:"HQ doctrine by phase — pick one per week",items:[
+    {name:"Defensive HQ",split:"Infantry/Lancer-heavy · Sergey / Molly lead",when:"Early–mid servers, and any difficulty you clear comfortably.",strength:"Survivable and forgiving — needs no perfect ratio.",weakness:"Falls behind on the very highest difficulties where wave 20 is a damage race."},
+    {name:"Marksman HQ",split:"Marksman-heavy or full-marksman · high-gen damage lead",when:"Very high difficulty where HQ 20 keeps burning despite clean play.",strength:"Wins the short wave-20 burst window on raw kills.",weakness:"Needs EVERY HQ sender on marksmen — a few infantry marches break it."}]},
+  {t:"table",h:"Leader trios by phase",cols:["Phase","Core trio","Why it works"],widths:["0.9fr","1.3fr","2fr"],rows:[
+    ["Early / low-diff","Sergey + Molly + strongest marksman","Sergey cuts damage taken and enemy attack; Molly adds mitigation and damage-dealt procs; the marksman fills a one-per-class stat trio."],
+    ["Midgame","Flint + Mia + Greg (or best built mid-gen)","Flint adds all-troop Attack and Lethality; Mia amplifies target damage taken; Greg adds later-gen marksman stats."],
+    ["High-diff HQ 20","Hector + Molly + Wayne (or Rufus)","Hector brings a huge opening Infantry/Marksman burst; Molly adds mitigation and a defender-lethality widget; Wayne adds extra attacks and crit, Rufus adds very high late-gen stats."]]},
+  {t:"cases",h:"Emergencies",items:[
+    {if:"Your city keeps failing early.",do:"Shout for reinforcements in alliance chat, confirm your barricade defense heroes are set, and keep some troops home so you stay in the event. Two failed defenses removes you from Joe targeting for the rest of the run."},
+    {if:"You are about to miss an online-only wave (7/14/17).",do:"Get online — even parked reinforcing an attacked ally scores. These waves only pay online players and are worth roughly double."},
+    {if:"HQ 20 keeps burning despite clean positioning.",do:"It is almost always the lead trio, the recall timing, or the doctrine — not everyone doing more random stuff. Try a stronger garrison lead or flip to marksman HQ; do not add noise."},
+    {if:"You sent the wrong troops or hero to HQ.",do:"Do not improvise further — follow the captain ratio on your next redeploy. If you are not the main lead, one support hero in slot 1 only."}]},
+  {t:"scripts",h:"Clean captain / member calls",items:[
+    {title:"HQ RECALL",lines:["Wave 9 hits landed — HQ team recall and send now.","Everyone else hold city swaps."]},
+    {title:"ONLINE WAVE",lines:["Wave 14 next, online-only. Stay active.","Not attacked? Support the attacked cities — don't pull from them early."]},
+    {title:"REFILL",lines:["HQ done — redeploy city swaps immediately for 11–19."]},
+    {title:"NO HEAL / NO TP",lines:["Do not heal and do not teleport mid-run — both cost points."]}]},
+  {t:"alliance",h:"Captaining a run",items:[
+    "<b>Before start:</b> post the city-swap plan, post the HQ wave 10/20 plan, name ONE HQ garrison lead, and set this week doctrine (defensive vs marksman HQ).",
+    "Assign who must stay online for waves <b>7 / 14 / 17</b>, and pair members for reinforcement swaps.",
+    "Keep the hive <b>tight around HQ (~1–2 min march)</b> — territory bonus stats and clean wave timing both depend on it.",
+    "Set difficulty to the hardest tier you clear <b>cleanly</b>. A higher tier better rewards are wiped out by failed cities and a burned HQ — <b>clear deeply before you climb</b>.",
+    "<b>During:</b> call recall after wave 9/19 lands, refill swaps after HQ, stay online for 7/14/17, and no heal / no teleport.",
+    "<b>After:</b> read the reports — did cities fail on coverage, swaps, or hero setup? Fix the doctrine, do not re-run a broken plan. If unlocked, the Expert <b>Baldur</b> adds extra event rewards."]},
+  {t:"rewards",h:"Rewards",items:[
+    "<b>Personal milestones &amp; state ranking</b> — driven by your own Crazy Joe points.",
+    "<b>Chief Gear materials:</b> Hardened Alloy and Polishing Solution — Joe is one of the best F2P sources of both.",
+    "<b>Design Plans</b> on later servers — required for Blue+ Chief Gear.",
+    "<b>Alliance milestones &amp; Alliance Tokens</b> — from the alliance total score and your participation.",
+    "Rewards scale with <b>server age and difficulty</b> and arrive by mail the next day — verify exact amounts on your in-game reward page."]},
+  {t:"callout",v:"info",title:"Difficulty caveat",text:"Official docs list <b>21</b> difficulty levels (12–21 were added in the Apr 2024 update). Community runs in 2025–26 discuss higher tiers on older servers, and exact reward quantities scale with server age — so treat 21 as a floor, not a hard cap, and check numbers in-game."},
+  {t:"vet",text:"Crazy Joe is an operations event, not a power event. The alliances that win are not the strongest — they are the ones where everyone swaps early, keeps their city empty, stays online for 7/14/17, and recalls only after the city hits land. Empty your city, send infantry, do not heal, do not teleport, and hit every online wave. Then read your reports and fix one thing each run — coverage, swap timing, hero setup, or HQ doctrine. Simple, repeatable, and it compounds every cycle."}
+ ]},
+
+{id:"champ",icon:"champ",cat:"war",name:"Alliance Championship",type:"Alliance · PvP",cadence:"Weekly · 5 rounds",req:"—",duration:"Week-long",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"fort",icon:"fort",cat:"war",name:"Fortress Battles",type:"Alliance · PvP",cadence:"Weekly · Friday",req:"—",duration:"Timeslot",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"mine",icon:"mine",cat:"war",name:"Frostfire Mine",type:"Solo · PvP",cadence:"Bi-weekly · 30 min",req:"—",duration:"30 min",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"foundry",icon:"foundry",cat:"war",name:"Foundry Battle",type:"Alliance · PvP",cadence:"Bi-weekly · 60 min",req:"Furnace 16 · Top 20",duration:"60 min",deep:true,
+ ov:"A bi-weekly, 60-minute alliance war for the Imperial Foundry of the fallen Solaris Dynasty. Two alliances enter a shared battlefield and fight for Arsenal Points by capturing and holding buildings. This is a guide for every member of the legion — what the event is, what to grab, which heroes to bring, and how to play your part so LWS wins.",
+ page:[
+  {t:"callout",v:"good",title:"Zero permanent losses — fight like you mean it",text:"Troops are only INJURED, never killed, and the whole field auto-heals when the hour ends. There's no reason to play scared — the only way to let the legion down is to sit out or freelance."},
+  {t:"p",h:"What it is, and how it's won",text:"Foundry isn't about being the biggest account in the lobby. It's won by <b>map control, timing and rally discipline</b> — everyone showing up healed, grabbing what they're told to grab, and joining rallies cleanly. Whatever your size, you have a job, and the legion wins or loses on whether everyone does theirs."},
+  {t:"callout",v:"warn",title:"If you sign up, show up",text:"Matchmaking weighs the <b>total power of the top 20 registered Chiefs (combatants and subs)</b> — not how many people sign up. A no-show makes the whole legion's matchup harder without adding a body to the field. Only take a slot you'll actually fill."},
+  {t:"list",h:"Getting in",items:[
+    "Your alliance must be <b>top 20</b> on the Alliance Power Leaderboard, and you need <b>Furnace 16+</b> to fight.",
+    "A legion is <b>30 combatants + 10 substitutes</b>; an alliance can field two. <b>Legion 1</b> is the main team whose result sets the alliance rewards.",
+    "Officers set the battle time and pick the roster — so make sure they know your availability.",
+    "You must enter with <b>no active marches, injured troops or reinforcements</b> out — and put out any city fire first, or you fail entry."]},
+  {t:"flow",h:"The event cycle",items:[
+    {label:"Voting",time:"2 days",game:"The alliance votes on the battle time.",you:"Vote for a slot you can actually make."},
+    {label:"Registration",time:"2 days",game:"Officers lock the time and pick combatants + subs.",you:"Confirm your availability — and only take a slot if you'll show."},
+    {label:"Matchmaking",time:"2 days",game:"Your opponent is assigned by time and power.",you:"Start prepping: troops, heals, teleporters, buffs."},
+    {label:"1 hr before",time:"—",game:"Battlefield not open yet.",you:"Clear marches, heal, recall reinforcements, douse fires."},
+    {label:"Battle",time:"60 min",game:"Three 15-min phases + a workshop window.",you:"Be online, follow the calls, fight your part."}]},
+  {t:"phases",h:"The battle — three phases + a workshop window",items:[
+    {n:1,time:"0:00 – 15:00",name:"Land grab",goal:"The legion locks utility and the outer ring before the Foundry opens.",buildings:["Boiler Room","Transit Station","Repair Facilities ×4","Prototype Sites"]},
+    {n:2,time:"15:00 – 30:00",name:"The Foundry opens",goal:"The decisive phase — the Foundry, the combat buff and mercenary strikes go live.",buildings:["Imperial Foundry","Munitions Warehouse","Mercenary Camp"]},
+    {n:3,time:"30:00 – 45:00",name:"Pressure & hold",goal:"Deny retakes, grind control duration, and soften enemy players with focused hits.",buildings:["All Phase 1–2 buildings stay contestable"]},
+    {n:4,time:"45:00 – 60:00",name:"Workshops & swing",goal:"Convert random Weapon Workshops and scattered supplies; time the final swing.",buildings:["Weapon Workshops (random waves)"]}]},
+  {t:"buildings",h:"Buildings & scoring — what you're fighting over",items:[
+    {name:"Imperial Foundry",first:"9,000 pts",rate:"1,800 / min",effect:"Dead center. The win condition: hardest to take, by far the most points, and it hands out new weapons. Only piled onto when the legion calls it.",pr:"top"},
+    {name:"Prototype Sites ×2",first:"6,000 pts",rate:"1,200 / min",effect:"Flank the Foundry. The biggest reliable point buildings — secured early and held hard.",pr:"high"},
+    {name:"Munitions Warehouse",first:"1,200 pts",rate:"240 / min",effect:"+15% your troop damage and −15% enemy troop damage. The combat buff that makes the next rally cheaper.",pr:"high"},
+    {name:"Transit Station",first:"utility",rate:"−50% TP cooldown",effect:"Halves the alliance's teleport cooldown. Taken first — mobility gets everyone to every fight on time.",pr:"high"},
+    {name:"Boiler Room",first:"utility",rate:"−50% capture time",effect:"You flip buildings twice as fast. The key to winning the Phase 1 land grab.",pr:"high"},
+    {name:"Repair Facilities ×4",first:"3,000 pts",rate:"600 / min",effect:"One per map corner. Steady points, lightly contested — easy to capture and hold, great for smaller accounts.",pr:"mid"},
+    {name:"Mercenary Camp",first:"1,200 pts",rate:"240 / min",effect:"Deploys up to 4 progressively stronger NPC strike teams to chip an enemy structure's offense and defense.",pr:"mid"},
+    {name:"Weapon Workshops",first:"gather",rate:"final phase",effect:"Spawn randomly in waves. Gather for points — troop count doesn't change gather speed, so send minimal troops. Anyone can grab these for a real endgame swing.",pr:"low"}]},
+  {t:"callout",v:"info",title:"How points are actually scored",text:"Arsenal Points come from <b>first occupation</b> of a building, <b>ongoing control duration</b>, <b>gathering &amp; loot</b>, and <b>KO scenarios — 80 pts per 10,000 enemy power defeated on offense, 40 on defense.</b> Capture first, hold long, stay aggressive on attack. When a held building falls, <b>50% of its stored points scatter</b> for anyone to loot."},
+  {t:"p",h:"What drives your power — and trigger it before you enter",text:"Your Foundry Troop Power comes from <b>Chief Gear, Hero Gear and Battle Tech</b> — not furnace flex. These buffs also stay active inside the battlefield if you trigger them beforehand: <b>combat Facility buffs, castle skin bonuses, and any Position Perk / President Skill you have.</b> If your state has Experts, <b>Fabian</b> grants Foundry-specific attack, defense, lethality, health, healing and rally-capacity bonuses — slot him if you can."},
+  {t:"loadouts",h:"Hero loadouts",items:[
+    {tier:"Rally Leader — Whale",leader:"<b>Jeronimo + Molly + Zinman</b> — one hero per troop type so all 9 expedition skills fire. Gear, charms and pets all count when you lead."},
+    {tier:"Rally Leader — Mid-spend",leader:"<b>Jessie + Molly/Gina + Zinman.</b> Same idea: cover all three troop types with your best."},
+    {tier:"Rally Leader — F2P",leader:"Your highest-level hero from <b>each</b> troop type (Infantry / Lancer / Marksman). Coverage beats a lopsided lineup."},
+    {tier:"Rally Joiner (everyone)",joiner:"Lead Slot 1 with <b>Jessie</b> (+25% damage — identical to whale Jeronimo, far more accessible). Only your Slot-1 first skill feeds the rally."}]},
+  {t:"callout",v:"warn",title:"Joining a rally the right way",text:"A rally carries the <b>leader's full 9 expedition skills + the first 4 joiners' primary skills.</b> So if you're joining, lead Slot 1 with your best damage hero (Jessie) and try to be one of the <b>first four</b> in — later joiners add troops but their buff is wasted if the four slots are already full of Level-5 skills."},
+  {t:"ratios",h:"Troop ratio",items:[
+    {label:"Holding / garrison a building (frontline-first)",r:[60,15,25]},
+    {label:"Attack rally (still skew Infantry vs a Bear hunt)",r:[45,15,40]}]},
+  {t:"p",h:"Why frontline-first",text:"Infantry stand in front and take the damage, lancers sit middle, marksmen are back-row single-target. Foundry is sustained chaos, so keep enough infantry that your backline doesn't evaporate, then scale damage through lancers and marksmen. Troop counter (Infantry &gt; Lancer &gt; Marksman &gt; Infantry) is a useful field heuristic — but building control, rally leadership and focus fire decide more than type advantage."},
+  {t:"duties",h:"The jobs in a legion — find where you fit",items:[
+    {role:"Rally Captain",job:"Starts the main rallies and chains targets.",who:"you're a top-stat hitter with strong heroes & gear",cmd:"lead the call; bring all three troop types"},
+    {role:"Building Anchor",job:"Holds a captured structure and times reinforcements.",who:"you're one of the tankiest defenders",cmd:"sit on the building, full reinforce, don't chase"},
+    {role:"Strike Squad",job:"Hits exposed enemy cities, breaks occupiers, then joins rallies.",who:"you react fast and reposition well",cmd:"focus the player, not the building"},
+    {role:"Reinforcement Wing",job:"Keeps anchors and rallies topped up.",who:"you're a reliable medium-power account",cmd:"join rallies in the first four; backfill holds"},
+    {role:"Workshop Looter",job:"Grabs Workshop spawns and scattered supplies fast.",who:"you move fast and watch the map",cmd:"gather workshops, snatch yellow tiles, no duels"}]},
+  {t:"split",h:"Whatever your size, you have a job",cols:[
+    {title:"Big accounts",items:["Lead the mass rallies on Imperial Foundry and Prototype Sites.","Clear enemy defenders off objectives so smaller accounts can hold them.","Body-block for teammates — you can afford the injuries."]},
+    {title:"Smaller / F2P accounts",items:["Capture and HOLD the lightly-contested Repair Facilities and Boiler Room.","Join the big rallies as one of the first four (Jessie lead) for the buff.","Gather Weapon Workshops and chase scattered-point tiles — every point counts."]}]},
+  {t:"steps",h:"How to play your part",items:[
+    "<b>Get eligible before the gun.</b> Clear all marches, heal injured troops, recall reinforcements and put out city fires — or you can't enter.",
+    "<b>Open the map and follow the calls.</b> Early on the legion grabs Boiler and Transit, then Repair Facilities and Prototype Sites. Go where you're pointed; don't freelance into solo ego fights.",
+    "<b>Join rallies the right way.</b> Lead Slot 1 with Jessie and try to be one of the first four joiners on a big rally so your buff actually counts.",
+    "<b>Don't throw yourself at Imperial alone.</b> The center only falls to a coordinated rally — pile on when the call comes, not before.",
+    "<b>Rotate out when you're hurt.</b> Leaving the field for 12 minutes fully heals your troops. A half-dead march is worth less than a healed one that returns on time.",
+    "<b>Help the endgame.</b> When Workshops spawn, grab them; loot scattered supplies; hold what's scoring. Close games are won on these scraps."]},
+  {t:"steps",h:"What the team prioritises — so you know what to follow",items:[
+    "<b>Boiler &amp; Transit</b> early — capture speed and mobility.",
+    "<b>Prototype Sites</b> — the biggest reliable point buildings.",
+    "<b>Munitions Warehouse</b> if it's free enough — the combat buff.",
+    "<b>Imperial Foundry</b> only when the legion can hold it or crack it.",
+    "<b>Workshops &amp; scattered supplies</b> to close out the endgame."]},
+  {t:"check",h:"Your pre-battle checklist",items:[
+    "Confirm your spot and the battle time with your officers — and actually be online for it.",
+    "Train up your best troops (T7/T8 if you have them) and max your infirmary.",
+    "Stockpile <b>healing speedups</b> (batch heal is disabled in-battle).",
+    "Carry <b>10+ Advanced Teleporters</b> for fast repositioning.",
+    "Trigger your VIP / research / Chief Gear / skin and any President or position buffs BEFORE you enter.",
+    "Clear marches, injured troops, reinforcements and city fires so you don't fail entry.",
+    "Know which role you're playing and which buildings you're covering."]},
+  {t:"rewards",h:"Rewards",items:[
+    "<b>Arsenal Tokens</b> → the Foundry Shop (refreshes every 14 days, two weeks after Sunfire Castle): design plans, charm designs, gear materials and hero fragments.",
+    "Generation-specific hero fragments — on a <b>Gen 1</b> state the shop carries <b>Zinman ×2 and Molly ×1</b>.",
+    "Alliance ranking rewards scale off Legion 1's finish; your personal rewards scale off your own Arsenal-Point rank within your legion."]},
+  {t:"vet",text:"Foundry isn't about being the biggest account in the lobby — it's about everyone playing their part. Show up healed, grab what you're told to grab, join rallies cleanly, and rotate out when you're hurt. Nobody loses troops here, so the only way to let LWS down is to sit it out or freelance. Bring your part and we win."}
+ ]},
+
+{id:"dragon",icon:"dragon",cat:"war",name:"Frostdragon Tyrant",type:"Alliance · PvE",cadence:"Recurring · rally boss",req:"Late-game",duration:"Timed window",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"herorally",icon:"hero",cat:"war",name:"Hero Rally",type:"Solo · Hero",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"svs",icon:"svs",cat:"cross",name:"State of Power (SvS)",type:"Cross-State War",cadence:"Monthly · ~10 days",req:"Furnace 16",duration:"10 days",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"koi",icon:"koi",cat:"cross",name:"King of Icefield (KOI)",type:"Cross-State",cadence:"Every 4 weeks · 7 days",req:"—",duration:"7 days",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"showdown",icon:"showdown",cat:"cross",name:"Alliance Showdown",type:"Alliance · Cross-State",cadence:"Monthly · 6.5 days",req:"—",duration:"6.5 days",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"castle",icon:"castle",cat:"cross",name:"Sunfire Castle",type:"Cross-State · Alliance",cadence:"Saturdays · from Day 53",req:"Day 53+",duration:"Battle day",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"hoc",icon:"hoc",cat:"cross",name:"Hall of Chiefs (HoC)",type:"State Race",cadence:"Gen 1–2 · 6–7 days",req:"Gen 1 & 2 only",duration:"6–7 days",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"kill",icon:"kill",cat:"cross",name:"Brothers in Arms (KE)",type:"Cross-State · PvP",cadence:"Monthly · 2 days",req:"No level gate",duration:"~48 hrs",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"merc",icon:"merc",cat:"cross",name:"Mercenary Prestige",type:"Solo · PvE",cadence:"Recurring",req:"—",duration:"Staged",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"hoh",icon:"hoh",cat:"hero",name:"Hall of Heroes (HoH)",type:"Solo · Hero",cadence:"Weekly · Sun–Tue",req:"—",duration:"Sun–Tue",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"grow",icon:"hero",cat:"hero",name:"Grow Your Heroes",type:"Solo · Hero",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"ginasrevenge",icon:"hero",cat:"hero",name:"Gina's Revenge",type:"Solo · Hunt",cadence:"Early-state",
+ ov:"Coming soon — details TBA."},
+
+{id:"herosmission",icon:"hero",cat:"hero",name:"Hero's Mission",type:"Solo · Hunt",cadence:"Gen 4+",
+ ov:"Coming soon — details TBA."},
+
+{id:"mia",icon:"hero",cat:"hero",name:"Mia Fortune",type:"Solo · Spend",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"wheel",icon:"wheel",cat:"hero",name:"Lucky Wheel",type:"Solo · Gacha",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"vault",icon:"hero",cat:"hero",name:"Vault of Enigma",type:"Solo",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"whisperer",icon:"hero",cat:"hero",name:"Beast Whisperer",type:"Solo · Pets",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"laby",icon:"laby",cat:"solo",name:"The Labyrinth",type:"Solo · Dungeon",cadence:"Weekly",req:"—",duration:"Weekly",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"beasts",icon:"beasts",cat:"solo",name:"Defeat Nearby Beasts",type:"Solo · Hunt",cadence:"~Monthly · 2 days",req:"—",duration:"2 days",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"crystal",icon:"target",cat:"solo",name:"Crystal Reactivation",type:"Solo",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"flame",icon:"target",cat:"solo",name:"Flame and Fang",type:"Solo · Hunt",cadence:"2-day window",
+ ov:"Coming soon — details TBA."},
+
+{id:"deadshot",icon:"target",cat:"solo",name:"Deadshot",type:"Solo · Mini-game",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"snow",icon:"target",cat:"solo",name:"Snowbusters",type:"Solo · Mini-game",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"journey",icon:"target",cat:"solo",name:"Journey of Light",type:"Solo",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"daybreak",icon:"target",cat:"solo",name:"Daybreak Expedition",type:"Solo",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"treasure",icon:"target",cat:"solo",name:"Treasure Hunter",type:"Solo",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"silver",icon:"target",cat:"solo",name:"Silver Shell Events",type:"Solo · Currency",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"fishing",icon:"target",cat:"solo",name:"Fishing Tournament",type:"Solo · Mini-game",cadence:"Monthly",
+ ov:"Coming soon — details TBA."},
+
+{id:"dreamscape",icon:"target",cat:"solo",name:"Dreamscape Memory",type:"Solo · Seasonal",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"mob",icon:"mob",cat:"mission",name:"Alliance Mobilization",type:"Alliance · Tasks",cadence:"Monthly · 6 days",req:"—",duration:"6 days",deep:true,
+ ov:"Coming soon — details TBA."},
+
+{id:"armament",icon:"mission",cat:"mission",name:"Armament Competition",type:"Solo · Umbrella",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"citydev",icon:"mission",cat:"mission",name:"City Development",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"planyourcity",icon:"mission",cat:"mission",name:"Plan your City",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"newtech",icon:"mission",cat:"mission",name:"Develop New Tech",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"standofarms",icon:"mission",cat:"mission",name:"Stand of Arms",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"powerup",icon:"mission",cat:"mission",name:"Power Up",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"trustedchief",icon:"mission",cat:"mission",name:"Trusted Chief",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"warprep",icon:"mission",cat:"mission",name:"War Preparation",type:"Solo · Mission",cadence:"Pre-war",
+ ov:"Coming soon — details TBA."},
+
+{id:"officer",icon:"mission",cat:"mission",name:"Officer Project",type:"Solo · Mission",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"trial",icon:"mission",cat:"mission",name:"Trial Event",type:"Solo · Challenge",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"home",icon:"mission",cat:"mission",name:"Home & Beyond",type:"Solo · Early",cadence:"Early-state",
+ ov:"Coming soon — details TBA."},
+
+{id:"overtime",icon:"mission",cat:"mission",name:"Working Overtime",type:"Solo · Quests",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"vision",icon:"mission",cat:"mission",name:"Vision of Dawn",type:"Solo · Mission",cadence:"~Day 120",
+ ov:"Coming soon — details TBA."},
+
+{id:"symphony",icon:"mission",cat:"mission",name:"Symphony of Change",type:"Solo · Grid",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"tundraadv",icon:"tundra",cat:"tundra",name:"Tundra Adventure",type:"Solo · Board",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"tundraalbum",icon:"tundra",cat:"tundra",name:"Tundra Album",type:"Solo · Collection",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"tundrastar",icon:"tundra",cat:"tundra",name:"Tundra Star",type:"Solo",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"traderoute",icon:"tundra",cat:"tundra",name:"Tundra Trade Route",type:"Solo · Logistics",cadence:"Daily caps",
+ ov:"Coming soon — details TBA."},
+
+{id:"tradingstation",icon:"tundra",cat:"tundra",name:"Tundra Trading Station",type:"Solo · Exchange",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"armsleague",icon:"tundra",cat:"tundra",name:"Tundra Arms League",type:"Solo · League",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"returntundra",icon:"tundra",cat:"tundra",name:"Return to Tundra",type:"Solo · Comeback",cadence:"Returning players",
+ ov:"Coming soon — details TBA."},
+
+{id:"romance",icon:"gift",cat:"season",name:"Romance Season",type:"Seasonal",cadence:"Seasonal",
+ ov:"Coming soon — details TBA."},
+
+{id:"frosty",icon:"gift",cat:"season",name:"Frosty Fortune",type:"Skin",cadence:"Seasonal",
+ ov:"Coming soon — details TBA."},
+
+{id:"icefire",icon:"gift",cat:"season",name:"Icefire Warhymn League",type:"League",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"shining",icon:"gift",cat:"season",name:"Shining City Pack",type:"Pack",cadence:"Recurring",
+ ov:"Coming soon — details TBA."},
+
+{id:"weeklycard",icon:"gift",cat:"season",name:"Weekly Benefits Card",type:"Pack",cadence:"Weekly",
+ ov:"Coming soon — details TBA."},
+
+];
+
+const EV_BY_ID = {};
+EVENTS.forEach(e => EV_BY_ID[e.id] = e);
+
+/* ---- landing shelves ---- */
+const landing = document.getElementById('eventsLanding');
+CATS.forEach(c => {
+  const evs = EVENTS.filter(e => e.cat === c.key);
+  if (!evs.length) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'ev-cat';
+  wrap.innerHTML = `<div class="ev-cat-h"><span class="cn">${evs.length} EVENTS</span><h3 style="color:${c.accent}">${c.name}</h3><span class="line"></span></div>`;
+  const grid = document.createElement('div');
+  grid.className = 'ev-tiles';
+  evs.forEach(e => {
+    const b = document.createElement('button');
+    b.className = 'ev-tile';
+    const blurb = (e.ov || '').slice(0, 76) + ((e.ov || '').length > 76 ? '…' : '');
+    b.innerHTML = `<div class="ic">${ICONS[e.icon] || ICONS.mission}</div><div class="tx"><div class="nm">${e.name}</div><div class="cd">${e.cadence || e.type || ''}</div><div class="typ">${blurb}</div></div><div class="arr">→</div>`;
+    b.addEventListener('click', () => openEvent(e.id));
+    grid.appendChild(b);
+  });
+  wrap.appendChild(grid);
+  landing.appendChild(wrap);
+});
+
+/* ---- full event index (text directory) ---- */
+const indexEl = document.getElementById('eventsIndex');
+if (indexEl) {
+  CATS.forEach(c => {
+    const evs = EVENTS.filter(e => e.cat === c.key);
+    if (!evs.length) return;
+    const g = document.createElement('div');
+    g.className = 'idx-group';
+    const rows = evs.map(e => {
+      const plain = (e.ov || '').replace(/<[^>]+>/g, '');
+      const desc = plain.length > 108 ? plain.slice(0, 108) + '…' : plain;
+      return `<button class="idx-row" data-ev="${e.id}"><span class="idx-dot" style="background:${c.accent}"></span><span class="idx-nm">${e.name}${e.deep ? '<span class="idx-star">★</span>' : ''}</span><span class="idx-desc">${desc}</span></button>`;
+    }).join('');
+    g.innerHTML = `<div class="idx-gh"><h4 style="color:${c.accent}">${c.name}</h4><span class="idx-cnt">${evs.length} EVENTS</span></div>${rows}`;
+    indexEl.appendChild(g);
+  });
+  indexEl.querySelectorAll('[data-ev]').forEach(b => b.addEventListener('click', () => openEvent(b.dataset.ev)));
+}
+
+/* ---- nav dropdown ---- */
+const navEvents = document.getElementById('navEvents');
+const navEventsBtn = document.getElementById('navEventsBtn');
+const navDD = document.getElementById('navDD');
+let ddHTML = `<div class="dd-group"><h4>Manual</h4>` +
+  [['#timeline','Timeline'],['#events','All Events'],['#ranks','Ranks'],['#gloss','Glossary']]
+   .map(s => `<a class="dd-link" href="${s[0]}" data-close><span class="dot" style="background:var(--frost-faint)"></span>${s[1]}</a>`).join('') + `</div>`;
+CATS.forEach(c => {
+  const evs = EVENTS.filter(e => e.cat === c.key);
+  if (!evs.length) return;
+  ddHTML += `<div class="dd-group"><h4 style="color:${c.accent}">${c.name}</h4>` +
+    evs.map(e => `<button class="dd-link" data-ev="${e.id}"><span class="dot" style="background:${c.accent}"></span>${e.name}${e.deep ? '<span class="star">★</span>' : ''}</button>`).join('') + `</div>`;
+});
+navDD.innerHTML = ddHTML;
+navDD.querySelectorAll('[data-ev]').forEach(b => b.addEventListener('click', () => { openEvent(b.dataset.ev); }));
+navDD.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', () => navEvents.classList.remove('open')));
+
+navEventsBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  const open = navEvents.classList.toggle('open');
+  navEventsBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+document.addEventListener('click', (e) => { if (!navEvents.contains(e.target)) navEvents.classList.remove('open'); });
+
+/* ---- ratio bar helper ---- */
+function ratioBar(r) {
+  const segs = [['Infantry', r[0], '#5cc8f0', 'ratio-inf'], ['Lancer', r[1], '#54f0b8', 'ratio-lan'], ['Marksman', r[2], '#ff8a3d', 'ratio-mar']];
+  const bar = '<div class="ratio-bar">' + segs.filter(s => s[1] > 0).map(s => `<span class="${s[3]}" style="flex:${s[1]}">${s[1]}%</span>`).join('') + '</div>';
+  const leg = '<div class="ratio-leg">' + segs.map(s => `<span><i style="background:${s[2]}"></i>${s[0]}</span>`).join('') + '</div>';
+  return bar + leg;
+}
+
+/* ---- rich block renderer (custom event pages) ---- */
+function calloutIcon(v){
+  if(v==='good') return '<svg viewBox="0 0 24 24" fill="none" stroke="#54f0b8" stroke-width="1.8"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>';
+  if(v==='warn') return '<svg viewBox="0 0 24 24" fill="none" stroke="#ff8a3d" stroke-width="1.8"><path d="M12 3 2 21h20L12 3z"/><path d="M12 10v5M12 18h.01"/></svg>';
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="#5cc8f0" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
+}
+function prLabel(p){return {top:'WIN CONDITION',high:'HIGH PRIORITY',mid:'STEADY',low:'F2P / GATHER'}[p]||'';}
+function renderNode(n){
+  if(n.k==='start'||n.k==='end') return `<div class="dn ${n.k}">${n.t}</div>`;
+  if(n.k==='phase') return `<div class="dn phase">${n.t}</div>`;
+  if(n.k==='act') return `<div class="dn act">${n.t}</div>`;
+  if(n.k==='q') return `<div class="dn q"><div class="q-t">${n.t}</div><div class="q-br"><div class="q-yes"><span>&#10003; YES</span>${n.yes}</div><div class="q-no"><span>&#10007; NO</span>${n.no}</div></div></div>`;
+  return '';
+}
+function renderBlock(b){
+  const head = b.h ? `<h3>${b.h}</h3>` : '';
+  switch(b.t){
+    case 'callout':
+      return `<div class="callout ${b.v}"><div class="co-ic">${calloutIcon(b.v)}</div><div><div class="co-t">${b.title||''}</div><div class="co-d">${b.text||''}</div></div></div>`;
+    case 'p':
+      return `<div class="rsec">${head}<p>${b.text}</p></div>`;
+    case 'list':
+      return `<div class="rsec">${head}<ul class="rlist${b.style==='warn'?' warn':''}">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+    case 'steps':
+      return `<div class="rsec">${head}<ol class="rsteps">${b.items.map(i=>`<li>${i}</li>`).join('')}</ol></div>`;
+    case 'check':
+      return `<div class="rsec">${head}<ul class="checklist">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+    case 'phases':
+      return `<div class="rsec">${head}<div class="phases">${b.items.map(p=>`<div class="phase"><div class="pn">P${p.n}</div><div class="pb"><div class="ptime">${p.time}</div><h4>${p.name}</h4><div class="pgoal">${p.goal}</div><div class="pblds">${p.buildings.map(x=>`<span>${x}</span>`).join('')}</div></div></div>`).join('')}</div></div>`;
+    case 'buildings':
+      return `<div class="rsec">${head}<div class="btable">${b.items.map(x=>`<div class="bcard pr-${x.pr}"><div class="bc-top"><div class="bc-name">${x.name}</div><div class="bc-pr">${prLabel(x.pr)}</div></div><div class="bc-stats"><span class="bc-pill">First capture: <b>${x.first}</b></span><span class="bc-pill">${x.rate}</span></div><div class="bc-eff">${x.effect}</div></div>`).join('')}</div></div>`;
+    case 'loadouts':
+      return `<div class="rsec">${head}<div class="loadout">${b.items.map(l=>`<div class="lo"><div class="lh">${l.tier}</div><div class="lv">${l.leader||l.joiner}</div></div>`).join('')}</div></div>`;
+    case 'ratios':
+      return `<div class="rsec">${head}${b.items.map(x=>`<div class="ratio-block"><div class="ratio-lbl">${x.label}</div>${ratioBar(x.r)}</div>`).join('')}</div>`;
+    case 'roles':
+      return `<div class="rsec">${head}<div class="roles">${b.items.map(r=>`<div class="role"><div class="rn">${r.n}</div><div class="rd">${r.d}</div></div>`).join('')}</div></div>`;
+    case 'split':
+      return `<div class="rsec">${head}<div class="split2">${b.cols.map(c=>`<div class="splitcol"><div class="sc-h">${c.title}</div><ul class="rlist">${c.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}</div></div>`;
+    case 'alliance':
+      return `<div class="rsec"><div class="alliance-box"><div class="ah">▰ ${b.h||'As an Alliance'}</div><ul class="rlist">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul></div></div>`;
+    case 'rewards':
+      return `<div class="rsec">${head}<ul class="rlist gold">${b.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+    case 'vet':
+      return `<div class="rsec"><div class="vetbox"><div class="vh">▰ Veteran's Note</div><p>${b.text}</p></div></div>`;
+    case 'flow':
+      return `<div class="rsec">${head}<div class="flow">${b.items.map(s=>`<div class="flowstep"><div class="fs-l"><div class="fs-lbl">${s.label}</div><div class="fs-time">${s.time||''}</div></div><div class="fs-r"><div class="fs-row"><span>GAME</span>${s.game}</div><div class="fs-row you"><span>YOU</span>${s.you}</div></div></div>`).join('')}</div></div>`;
+    case 'setups':
+      return `<div class="rsec">${head}<div class="setups">${b.items.map(s=>`<div class="setup"><div class="su-h">${s.name}</div><div class="su-split">${s.split}</div><div class="su-rows"><div><span>USE WHEN</span>${s.when}</div><div><span>STRENGTH</span>${s.strength}</div><div><span>WATCH</span>${s.weakness}</div></div></div>`).join('')}</div></div>`;
+    case 'duties':
+      return `<div class="rsec">${head}<div class="duties">${b.items.map(d=>`<div class="duty"><div class="du-role">${d.role}</div><div class="du-job">${d.job}</div><div class="du-meta"><div><span>GOOD FIT IF</span>${d.who}</div><div><span>YOUR FOCUS</span>${d.cmd}</div></div></div>`).join('')}</div></div>`;
+    case 'cases':
+      return `<div class="rsec">${head}<div class="cases">${b.items.map(c=>`<div class="case"><div class="ca-if"><span>IF</span>${c.if}</div><div class="ca-do"><span>DO</span>${c.do}</div></div>`).join('')}</div></div>`;
+    case 'scripts':
+      return `<div class="rsec">${head}<div class="scripts">${b.items.map(s=>`<div class="script"><div class="sc-t">${s.title}</div><pre>${s.lines.join('\n')}</pre></div>`).join('')}</div></div>`;
+    case 'metrics':
+      return `<div class="rsec">${head}<div class="metrics"><div class="metric mh"><div>Metric</div><div>Why it matters</div><div>Good looks like</div></div>${b.items.map(x=>`<div class="metric"><div class="me-m">${x.m}</div><div class="me-why">${x.why}</div><div class="me-good">${x.good}</div></div>`).join('')}</div></div>`;
+    case 'template':
+      return `<div class="rsec">${head}<pre class="template">${b.text}</pre></div>`;
+    case 'decision':
+      return `<div class="rsec">${head}<div class="decision">${b.nodes.map(renderNode).join('')}</div></div>`;
+    case 'table':
+      return `<div class="rsec">${head}<div class="dtable" style="grid-template-columns:${b.widths?b.widths.join(' '):'repeat('+b.cols.length+',1fr)'}">${b.cols.map(c=>`<div class="dth">${c}</div>`).join('')}${b.rows.map(r=>r.map(cell=>`<div class="dtc">${cell}</div>`).join('')).join('')}</div></div>`;
+    default: return '';
+  }
+}
+
+/* ---- generic page body (events without a custom page) ---- */
+function genericBody(e){
+  let h='';
+  if (e.ov) h += `<div class="rsec"><h3>Overview</h3><p>${e.ov}</p></div>`;
+  if (e.steps && e.steps.length) h += `<div class="rsec"><h3>How to Proceed</h3><ol class="rsteps">${e.steps.map(s => `<li>${s}</li>`).join('')}</ol></div>`;
+  if (e.loadout && e.loadout.length) h += `<div class="rsec"><h3>Heroes &amp; Loadout</h3><div class="loadout">${e.loadout.map(l => `<div class="lo"><div class="lh">${l[0]}</div><div class="lv">${l[1]}</div></div>`).join('')}</div></div>`;
+  if (e.ratio) h += `<div class="rsec"><h3>Troop Ratio${e.ratioLabel ? ' — ' + e.ratioLabel : ''}</h3>${ratioBar(e.ratio)}</div>`;
+  if (e.alli && e.alli.length) h += `<div class="rsec"><div class="alliance-box"><div class="ah">▰ As an Alliance</div><ul class="rlist">${e.alli.map(a => `<li>${a}</li>`).join('')}</ul></div></div>`;
+  if (e.tips && e.tips.length) h += `<div class="rsec"><h3>Veteran Tips</h3><ul class="rlist">${e.tips.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+  if (e.vet) h += `<div class="rsec"><div class="vetbox"><div class="vh">▰ Veteran's Note</div><p>${e.vet}</p></div></div>`;
+  return h;
+}
+
+/* ---- full-page event view (hash routed) ---- */
+const homeEl = document.getElementById('home');
+const eventPageEl = document.getElementById('eventPage');
+
+function renderEventPage(id){
+  const e = EV_BY_ID[id];
+  if(!e) return false;
+  const cat = CATS.find(c=>c.key===e.cat) || {name:'',accent:'#5cc8f0'};
+  const qf=[];
+  if(e.type) qf.push(['Type',e.type]);
+  if(e.cadence) qf.push(['Cadence',e.cadence]);
+  if(e.req) qf.push(['Requirement',e.req]);
+  if(e.duration) qf.push(['Duration',e.duration]);
+  const body = e.page ? e.page.map(renderBlock).join('') : genericBody(e);
+  eventPageEl.innerHTML = `
+    <div class="ep-hero">
+      <div class="wrap">
+        <button class="ep-back" data-home>&#8592; All events</button>
+        <div class="ep-cat" style="color:${cat.accent}">${cat.name}</div>
+        <div class="ep-head">
+          <div class="ic">${ICONS[e.icon]||ICONS.mission}</div>
+          <div><h1>${e.name}</h1><div class="cd">${e.cadence||e.type||''}</div></div>
+        </div>
+        ${qf.length?`<div class="qfacts ep-qf">${qf.map(q=>`<div><div class="k">${q[0]}</div><div class="v">${q[1]}</div></div>`).join('')}</div>`:''}
+      </div>
+    </div>
+    <div class="ep-body"><div class="wrap">${(e.ov && e.page)?`<p class="ep-lede">${e.ov}</p>`:''}${body}</div></div>
+    <div class="ep-foot"><div class="wrap"><button class="ep-back" data-home>&#8592; Back to all events</button></div></div>`;
+  eventPageEl.querySelectorAll('[data-home]').forEach(b=>b.addEventListener('click',goHome));
+  return true;
+}
+function showEventPage(){homeEl.style.display='none';eventPageEl.hidden=false;window.scrollTo(0,0);}
+function showHome(){eventPageEl.hidden=true;homeEl.style.display='';}
+function goHome(){ if(location.hash){location.hash='';} else {showHome();} }
+function route(){
+  const m=(location.hash||'').match(/^#event-([a-z]+)$/);
+  if(m && EV_BY_ID[m[1]] && renderEventPage(m[1])){ showEventPage(); return; }
+  showHome();
+}
+function openEvent(id){ navEvents.classList.remove('open'); location.hash='event-'+id; }
+window.addEventListener('hashchange', route);
+route();
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { navEvents.classList.remove('open'); if(location.hash) location.hash=''; } });
+
+
+/* ============================================================
+   GLOSSARY
+   ============================================================ */
+const GLOSS=[
+  ["R1–R5","Alliance ranks. R1 recruit → R5 leader. R4s are the working officers."],
+  ["NAP","Non-Aggression Pact. A truce between alliances/states (e.g. 'NAP10' = top 10 don't hit each other)."],
+  ["SvS","State of Power — State vs State. The monthly 10-day cross-state war."],
+  ["KOI","King of Icefield. 7-day cross-state event, 2 weeks after SvS."],
+  ["HoC","Hall of Chiefs. The Gen 1–2 daily-stage progression race; top 10 win Jeronimo shards."],
+  ["BiA / KE","Brothers in Arms, the monthly Kill Event. Score by killing or severely injuring enemy troops."],
+  ["HoH","Hall of Heroes. Weekly hero-shard event, Sun–Tue."],
+  ["KE","Kill Event. Scoring built around defeating enemy troops."],
+  ["FC","Fire Crystal. Core late-game upgrade currency (FC1–FC10+)."],
+  ["Gen(x)","Hero Generation. Each hero belongs to a gen tied to state age."],
+  ["HQ","Alliance Headquarters — the heart of your territory."],
+  ["Merit","Personal merit points earned in battle events like Canyon Clash."],
+  ["Mithril","Premium upgrade material; hoard it for SvS/KOI."],
+  ["Orichalcum","Ore mined during Frostfire Mine."],
+  ["Essence Stone","Key reward from Bear Trap."],
+  ["Arsenal Token","Rare reward from Foundry Battle."],
+  ["Furnace","Your most important building — caps every other building's level."],
+  ["Embassy","Building that controls how many alliance helps you can receive."],
+  ["Command Center","Sets your rally size."],
+  ["Helps","Taps from alliancemates that cut build/research timers."],
+  ["Speedups","Time-skip items. War fuel — save for prep stages."],
+  ["Supreme President","Title won by the top of the winning SvS state. Lasts 2 weeks."],
+  ["Polar Terror","High-value world-map beast you rally for rewards."],
+  ["Shards","Hero fragments; collect enough to unlock or star-up a hero."],
+  ["Skill Manual","Upgrade item for hero skills; Mythic Manuals are a top HoC reward."]
+];
+const gg=document.getElementById('gloss-grid');
+GLOSS.forEach(([k,v])=>{
+  const d=document.createElement('div');
+  d.className='term';
+  d.innerHTML=`<div class="tk">${k}</div><div class="tv">${v}</div>`;
+  gg.appendChild(d);
+});
+</script>
+</body>
+</html>
