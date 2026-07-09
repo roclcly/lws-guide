@@ -1586,8 +1586,78 @@ const EVENTS = [
 {id:"silver",icon:"target",cat:"solo",name:"Silver Shell Events",type:"Solo · Currency",cadence:"Recurring",
  ov:"Coming soon — details TBA."},
 
-{id:"fishing",icon:"target",cat:"solo",name:"Fishing Tournament",type:"Solo · Mini-game",cadence:"Monthly",
- ov:"Coming soon — details TBA."},
+{id:"fishing",icon:"target",cat:"solo",name:"Fishing Tournament",type:"Solo · Mini-game",cadence:"Monthly · 3 days",req:"—",duration:"3 days · seasonal",deep:true,
+ ov:"A monthly 3-day solo mini-game. You cast a hook, dive, and catch fish, divers, chests and items — each catch pays <b>equal Fishing Points and Fishing Tokens</b>. Points feed daily missions, the Ice Fishing Club pass and the state leaderboard; tokens upgrade your kit or spin the treasure wheel. It rotates through four seasons, so full collections take four months. This guide covers the loop, the kit, the special items, and how to actually score — whether you just want the free daily rewards or you're chasing a skin.",
+ page:[
+  {t:"callout",v:"good",title:"What actually matters",text:"For 95% of members this event is simple: <b>hit 2,000 points a day</b> for the guaranteed mission rewards, upgrade your kit, and steadily fill collections. Leaderboard skins are a whale/heavy-saver goal — don't stress them. The free daily rewards over 3 days are the real prize."},
+  {t:"callout",v:"warn",title:"Never let your bait sit at the 10 cap",text:"You regen <b>1 bait every 3 hours, max 10</b>. At the cap, regen STOPS and you waste hours of free casts. Treat bait like energy — always keep it flowing. Also: <b>activate every special item BEFORE you tap Use Bait</b>; you cannot apply them once the dive starts."},
+  {t:"p",h:"How it works",text:"You start with <b>5 baits</b> and regen 1 every 3 hours (cap 10). Each bait is one Ice Fishing run: your hook sinks, you dodge fish on the way down, then catch them on the way up. Rarer fish pay far more — a 1&#9733; is ~10 pts, a 5&#9733; can be 150. Every catch also gives Tokens, and <b>first-time</b> catches give Gems. The second mode, <b>Frosty Prospector</b>, needs a Treasure Chart instead of bait but auto-maxes your kit (550m depth, 20-fish haul) and is stuffed with rare fish and chests — it's where the points are."},
+  {t:"table",h:"The two modes",cols:["Mode","Costs","Kit","Best for"],widths:["1.1fr","1.1fr","1.3fr","1.8fr"],rows:[
+    ["<b>Ice Fishing</b>","1 bait","Your real upgrade level","Daily missions, earning tokens, warming up. Fewer rare fish."],
+    ["<b>Frosty Prospector</b>","1 Treasure Chart","Auto-maxed to Lv10","Rare fish, sunken chests, big scores. 1 free chart/day; save your best items for it."]]},
+  {t:"callout",v:"info",title:"Frosty Prospector is the money mode",text:"You get <b>1 free Treasure Chart per day</b> (more from the Ice Fishing Club or the Fishing Pro Set). In Frosty your kit is auto-Lv10 (550m, 20 haul) and rare-fish density is highest — so <b>spend your Lanterns, Scanners, Stabilizers, Horns and Vouchers here</b>, not in Ice Fishing. The classic big-score combo: <b>Horn of Poseidon + Icefisher Voucher</b> in one Frosty run can net multiple 5&#9733; fish for 450+ points."},
+  {t:"p",h:"The fishing kit",text:"Three parts, each upgradeable to <b>Lv10 with Fishing Tokens</b> earned from catches: <b>Line</b> (max depth, up to 550m), <b>Hook</b> (how many fish per haul, up to 20), and <b>Sinker</b> (starting depth, up to 165m). Tokens are spent during the event only — you can't bank them past a maxed kit. Once all three hit Lv10 you unlock the <b>Sunken Treasure Hunt</b>, a lucky wheel costing 1,500 tokens a spin (Mythic shards, Essence Stones, speedups)."},
+  {t:"ratios",h:"Upgrade order — Hook first",items:[
+    {label:"Hook — more fish per haul (biggest score gain)",r:[60,25,15]},
+    {label:"Line — reach the deep rare fish",r:[25,60,15]},
+    {label:"Sinker — starting depth (do this last)",r:[20,20,60]}]},
+  {t:"callout",v:"warn",title:"Don't over-invest the Sinker",text:"Upgrade <b>Hook first</b> (haul is the limiting factor on score), then <b>Line</b> (depth = rarer fish), then <b>Sinker last</b>. Sinker only sets your starting depth, and you can already get deep by hugging the edges — it's the weakest token spend."},
+  {t:"table",h:"Special items — save them for Frosty",cols:["Item","What it does","When to use"],widths:["1.1fr","1.7fr","1.6fr"],rows:[
+    ["<b>Lantern</b>","Lights up past 300m (below that you're nearly blind)","Any deep run, especially Frosty. Required to see deep fish."],
+    ["<b>Ocean Scanner</b>","Points to nearby rare fish on the ascent","Frosty runs, to steer toward 4&#9733;/5&#9733; catches."],
+    ["<b>Reel Stabilizer</b>","Raises your shock tolerance 2 &rarr; 4 hits","Deep/dense runs so you don't get auto-reeled early."],
+    ["<b>Horn of Poseidon</b>","Summons a specific fish of your choice","ONLY for a 5&#9733; or a missing-collection fish, at depth you can reach."],
+    ["<b>Icefisher Voucher</b>","1.5&times; points & tokens for the run","Only on your highest-scoring runs — wait, see the points, then apply."]]},
+  {t:"steps",h:"How to score a run (the corner method)",items:[
+    "<b>Descend on an edge:</b> park your hook top-left or top-right and let fish bounce off the wall and drift away — this opens clean lanes down.",
+    "Slide slightly away if a fish heads for your hook, then return to the corner. Repeat to target depth.",
+    "For regular (Lantern-less) runs, descend to ~<b>250–300m</b>, hit your shock limit, then <b>catch 2&#9733;+ fish on the way up</b> for steady points.",
+    "<b>Dodge 1&#9733; fish</b> — each one wastes a hook slot for only ~10 pts. Prioritise 2&#9733;/3&#9733; and up.",
+    "Bad run? <b>Hit pause &rarr; Retreat.</b> You keep your bait AND your chart — reset and try again with zero penalty. Use this aggressively to practice the descent."]},
+  {t:"decision",h:"Should I use a Horn / Voucher this run?",nodes:[
+    {k:"start",t:"Starting a run (ideally Frosty Prospector)"},
+    {k:"q",t:"Missing a specific rare fish, or want a guaranteed 5&#9733;?",yes:"Use a Horn of Poseidon — but only if it is within your depth range.",no:"Fish normally; don't waste a Horn on common fish you'd catch anyway."},
+    {k:"act",t:"Finish the run and look at the point total."},
+    {k:"q",t:"Did the run score big (many 3&#9733;/4&#9733;/5&#9733;)?",yes:"Apply an Icefisher Voucher for 1.5&times; points & tokens.",no:"Skip the voucher — save it for a better run."},
+    {k:"end",t:"Collect. Keep bait flowing, keep charts for Frosty."}]},
+  {t:"table",h:"Daily missions — hit 2,000 every day",cols:["Points","Reward (approx)"],widths:["0.7fr","2.6fr"],rows:[
+    ["250","Enhancement XP, 5K Hero XP, 2&times;5-min speedups"],
+    ["500","Enhancement XP, 10K Hero XP, 2&times;5-min speedups"],
+    ["1,000","Enhancement XP, 15K Hero XP, 4&times;5-min speedups"],
+    ["1,500","Enhancement XP, 20K Hero XP, 4&times;5-min speedups"],
+    ["<b>2,000</b>","<b>Lucky Hero Gear Chest</b>, Enhancement XP, 30K Hero XP, 6&times;5-min speedups"]]},
+  {t:"callout",v:"info",title:"Spread your bait across the 3 days",text:"Missions reset daily at server reset (fresh baits + fresh 2,000-point goal). <b>Don't burn all your bait on Day 1</b> — you'll miss Day 2/3 missions. Aim ~667 pts/day minimum to clear all tiers; the Lucky Hero Gear Chest at 2,000 is the big one."},
+  {t:"flow",h:"3-day playbook",items:[
+    {label:"Day 1",game:"5 baits + missions live.",you:"Use your free chart on a Frosty run to catch rare fish. Fish your baits, chase 2,000 pts, and pump tokens into Hook &rarr; Line as you go."},
+    {label:"Day 2",game:"+5 baits (cap 10), missions reset.",you:"Kit should be near max now. Use Lantern/Scanner/Stabilizer on deeper runs. Clear 2,000 again. Spin Sunken Treasure if kit is Lv10 and you have 1,500+ tokens."},
+    {label:"Day 3",game:"+5 baits, final missions reset.",you:"Last push. Spend saved Treasure Charts on repeated Frosty runs; use Horns + Vouchers on your best casts. Clear 2,000, then claim all Ice Fishing Club levels and inbox mail."}]},
+  {t:"split",h:"Two reward tracks",cols:[
+    {title:"Ice Fishing Club (the pass)",items:[
+      "Every <b>500 points = 1 level</b>; free track gives Treasure Charts, shards, speedups.",
+      "Optional <b>Pro (+10%)</b> and <b>Master (+20%)</b> tiers add a permanent bonus to ALL points & tokens (they stack to +30%).",
+      "If you buy, buy <b>before your first cast</b> — the bonus applies retroactively to everything."]},
+    {title:"Collections (permanent skins)",items:[
+      "<b>Fish (150)</b> &rarr; Treasure Stronghold city skin, <b>+2% troop attack</b>.",
+      "<b>Divers (10)</b> &rarr; Ice Journey march skin, <b>+5% march speed</b>.",
+      "<b>Items (60)</b> &rarr; Master of the Seas avatar frame, <b>+2% troop defense</b>.",
+      "<b>Chests (10)</b> &rarr; Master of the Seas nameplate (cosmetic). Progress carries across events; each fish appears in only one season."]}]},
+  {t:"callout",v:"info",title:"Leaderboard skins (rank push)",text:"Top state ranks earn 30-day skins whose <b>buffs are permanent</b>: <b>Ranks 1–6</b> get all three (city +2% atk, frame +2% def, march +5% speed); <b>7–15</b> get the city skin + frame; <b>16–50</b> get the frame. Realistic cutoffs run ~30–60k points on older states, 100k+ where whales push. This needs stockpiled Treasure Charts (roughly 30–40 for top-15, 45–60 for top-6) and usually an Ice Fishing Club pass. F2P: skip the rank race and farm missions, collections and the Sunken wheel instead."},
+  {t:"setups",h:"By spend level",items:[
+    {name:"F2P",split:"Missions + collections + free daily chart",when:"You aren't buying packs.",strength:"~10–13k points is plenty for all daily rewards; steady collection progress every season.",weakness:"Top ranks are essentially out of reach — don't chase skins, chase the free value."},
+    {name:"Light spender ($1–$10)",split:"Fishing Pro Set, bought BEFORE fishing",when:"You want a faster kit and some charts.",strength:"Instantly maxes the kit and grants charts/items; ~20–35k points; can contend for city-skin ranks over several events if you save charts.",weakness:"Still needs chart-saving discipline across months for top-15."},
+    {name:"Whale",split:"All packs + Ice Fishing Club tiers, big Day-3 push",when:"You're going for rank 1–6.",strength:"Every Voucher on Frosty, ~45–60 saved charts, 60k–100k+ points; also hits the 50k Daybreak aquarium mark.",weakness:"Expensive and chart-gated — one big push on Day 3 to avoid tipping off rivals."}]},
+  {t:"scripts",h:"Alliance chat templates",items:[
+    {title:"DAY 1",lines:["Fishing Tournament is live! Everyone gets 5 baits/day — hit 2,000 pts each day for the mission rewards.","Save Lanterns/Scanners/Vouchers/Horns for Frosty Prospector runs. Don't cap your bait at 10."]},
+    {title:"DAY 2",lines:["New baits + missions reset — clear 2,000 again.","Kit maxed? Spin Sunken Treasure with spare tokens. Rank-chasers: stockpile charts, we push Day 3."]},
+    {title:"DAY 3",lines:["Final day — use all your Frosty charts now, Horns + Vouchers on your best casts.","Claim every Ice Fishing Club level and your inbox mail before it ends."]}]},
+  {t:"cases",h:"Common mistakes",items:[
+    {if:"Your bait is sitting at 10.",do:"You've stopped regenerating — cast now. Never let it cap; that's free points lost every 3 hours."},
+    {if:"You used a Horn on a common fish.",do:"Wasted. Horns are only for a guaranteed 5&#9733; or a missing-collection fish, and only at a depth your Line can reach."},
+    {if:"You bought the pass AFTER fishing.",do:"The +10/+20% bonus only applies to catches made after purchase — always buy before your first cast."},
+    {if:"You fished below 300m with no Lantern.",do:"You're fishing blind (mostly 1&#9733;). Either bring a Lantern or stay in the 0–300m visible zone."},
+    {if:"You burned all bait on Day 1.",do:"You'll miss Day 2/3's 2,000-pt missions. Spread ~667 pts/day to secure every daily reward."}]},
+  {t:"vet",text:"For almost everyone, Fishing Tournament is a free-rewards event, not a competition. Keep your bait flowing (never cap it), hit 2,000 points every day for the Lucky Hero Gear Chest, and spend tokens Hook &rarr; Line &rarr; Sinker. Save every special item for Frosty Prospector, where your kit is auto-maxed and the rare fish live — Horn + Voucher on one good Frosty run is your biggest single score. Retreat freely to practice the corner descent. Chase collections for the permanent skins over the seasons, and only chase the leaderboard if you're saving charts and buying the pass. Simple, repeatable, and the daily missions alone make it worth logging in."}
+ ]},
 
 {id:"dreamscape",icon:"target",cat:"solo",name:"Dreamscape Memory",type:"Solo · Seasonal",cadence:"Recurring",
  ov:"Coming soon — details TBA."},
