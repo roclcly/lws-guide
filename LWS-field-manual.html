@@ -1342,8 +1342,70 @@ const EVENTS = [
 {id:"fort",icon:"fort",cat:"war",name:"Fortress Battles",type:"Alliance · PvP",cadence:"Weekly · Friday",req:"—",duration:"Timeslot",deep:true,
  ov:"Coming soon — details TBA."},
 
-{id:"mine",icon:"mine",cat:"war",name:"Frostfire Mine",type:"Solo · PvP",cadence:"Bi-weekly · 30 min",req:"—",duration:"30 min",deep:true,
- ov:"Coming soon — details TBA."},
+{id:"mine",icon:"mine",cat:"war",name:"Frostfire Mine",type:"Solo · PvPvE",cadence:"Bi-weekly · 30 min",req:"Furnace 16+",duration:"3 min prep + 30 min",deep:true,
+ ov:"A bi-weekly 30-minute solo PvPvE mine. Everyone in the state — even alliance-mates — competes to gather <b>Orichalcum</b> by defeating patrols, occupying Veins, grabbing timed <b>outbursts</b>, and contesting a central <b>Smelter</b>. Troops are unlimited and never die (defeated heroes just get a 5-min cooldown), so it's a positioning-and-timing race, not a power fight. Your whole score is the Orichalcum you personally gather. This guide covers the loop, the skill tree, the all-important 60-second vein cycle, and how to play it as F2P vs a whale.",
+ page:[
+  {t:"callout",v:"good",title:"The one habit that carries the event",text:"Once you unlock the <b>Level-3 left skill</b>, run the <b>60-second vein cycle</b>: send one march to occupy any Vein, wait for the <b>+5,000</b> floating text, recall immediately, then repeat every 60s. That single loop is the backbone of a good score — everything else (patrols, outbursts, smelter) is layered on top."},
+  {t:"callout",v:"warn",title:"Don't mine first — hunt patrols for XP first",text:"Early game, <b>do NOT gather Veins</b>. Defeating <b>Mine Patrols</b> gives Frostfire XP, and you need <b>5,400 XP</b> (about 36 Level-2 patrols) to max the skill tree. Rush patrols until your key skills are unlocked — mining before that just wastes the opening minutes."},
+  {t:"p",h:"What it is",text:"You need <b>Furnace 16+</b>. On event day you register for one of several UTC slots (every ~4 hours); be in-event during the <b>3-minute prep</b> phase. Your city teleports to a special map with three zones — <b>Zone 1 (Lv1 Veins), Zone 2 (Lv2), Zone 3 (Lv3 Veins + the Smelter)</b>. Troops are unlimited and losses are temporary; a defeated hero sits out 5 minutes. Rewards come from <b>milestones</b> (personal Orichalcum) and <b>leaderboard rank</b> (also Orichalcum) — there's no separate points system."},
+  {t:"table",h:"Veins & yields",cols:["Source","Yield","Notes"],widths:["1.2fr","1.4fr","2fr"],rows:[
+    ["Lv1 Vein","8/sec (~6,840 total)","Zone 1. Safe, low. Fine for low-power players."],
+    ["Lv2 Vein","16/sec (~17,280)","Zone 2. Good F2P target away from the center."],
+    ["Lv3 Vein","32/sec (~34,560)","Zone 3. Highest yield, heavily contested — expect PvP."],
+    ["<b>Vein Outburst</b>","<b>+200/sec (4,000 in ~20s)</b>","Undefended, spawns at set times. ALWAYS prioritise over normal Veins."],
+    ["Mine Patrol","1,500 Orichalcum + XP","Kill for XP early (skill unlocks); points bonus once skilled."],
+    ["Orichalcum Piles","small each","Drop around a Vein on first clear — loot with a spare squad; 15–20k over a match decides ranks."]]},
+  {t:"callout",v:"info",title:"Outbursts are 6× a Lv3 Vein — never miss them",text:"Vein Outbursts spawn at the <b>8, 9, 10, 18, 19 and 20-minute marks</b>. Each holds <b>4,000 Orichalcum</b> at +200/sec (cleared in ~20s), is <b>undefended</b>, and gets swarmed instantly. A banner warns you <b>60s and 10s before</b> each one — have free marches ready, recall off normal Veins, and grab them. This is the single biggest yield-per-second in the event."},
+  {t:"steps",h:"The skill tree — unlock order",items:[
+    "<b>Right skill 1 — +1,500 Orichalcum per patrol kill.</b> First priority; turns your XP grind into income.",
+    "<b>Right skill 2 — +25% march speed.</b> Reach Veins and outbursts first.",
+    "<b>Left skill 3 — +5,000 Orichalcum on occupying a common Vein (once/min).</b> This is THE money skill — it powers the 60-second cycle.",
+    "<b>Left skill 4 — +15% gathering speed.</b> Solid throughput bump.",
+    "<b>Level-5 active skill</b> — either <b>+66% gather speed</b> (right, F2P-friendly) or <b>+66% troop damage</b> (left, for smelter/PvP). Pick ONE path; you can't reset it."]},
+  {t:"callout",v:"warn",title:"The Level-5 gather buff is a snapshot — activate BEFORE deploying",text:"The +66% gather-speed active must be turned on <b>before</b> your troops enter the Vein — the game locks the buff in for that whole gathering task even after the skill goes on cooldown. It does <b>not</b> speed up Outburst gathering, only normal Veins. Save it for a big Lv3 Vein you'll sit on, or the smelter push."},
+  {t:"decision",h:"F2P vs aggressive skill path",nodes:[
+    {k:"start",t:"Choosing your Level-5 skill (permanent)"},
+    {k:"q",t:"Are you F2P / avoiding PvP?",yes:"Take the RIGHT path (+66% gather speed). Farm Lv2/3 Veins on the edges, run the 60s cycle, skip the smelter.",no:"Take the LEFT path (+66% troop damage). You can steal occupied Veins and contest the smelter."},
+    {k:"end",t:"Commit — the choice can't be reset this event."}]},
+  {t:"ratios",h:"Troop formation — balanced 33/33/33",items:[
+    {label:"All-purpose marches (Inf / Cav / Mark)",r:[34,33,33]},
+    {label:"Smelter / outburst rush — lean faster",r:[20,50,30]}]},
+  {t:"callout",v:"info",title:"Gear & buffs (world tech doesn't apply)",text:"World-map march-speed tech does NOT carry into Frostfire — only city tech, Frostfire talents, and gear/pet buffs do. So equip <b>+March Speed</b> (reach targets first) and <b>+Troop Load</b> gear, and turn on any <b>gathering-speed pet/item buffs before you enter</b>. Unlock your <b>6th march queue</b> if you can — more marches = more veins cycled at once."},
+  {t:"flow",h:"30-minute timeline",items:[
+    {label:"Prep (3:00–0:00)",game:"You teleport onto the map.",you:"Jump near a cluster of patrols with 2+ Lv2/3 Veins nearby (edges are less contested). Position squads at the edge, ready to strike."},
+    {label:"Open (0:00–~5:00)",game:"Patrols & Veins live.",you:"Hunt patrols hard for XP — DON'T mine yet. Rush to unlock right-1, right-2, then left-3 (the +5,000 skill)."},
+    {label:"Mid (5:00–8:00)",game:"Skills online.",you:"Start the 60-second vein cycle (occupy &rarr; +5,000 &rarr; recall &rarr; repeat). Keep killing patrols between cycles; loot Orichalcum piles."},
+    {label:"Outbursts (8/9/10 & 18/19/20)",game:"Banner warns 60s & 10s before.",you:"Recall everything off normal Veins and swarm the outbursts (4,000 each, ~20s). Then resume the cycle."},
+    {label:"Smelter (23:00 → end)",game:"Smelter opens in Zone 3.",you:"Rank-chaser: rush it — even 1–2 seconds of occupancy can bank a rank bonus. F2P: usually skip it and keep cycling/looting to the buzzer."}]},
+  {t:"table",h:"Smelter occupancy bonus (by rank held)",cols:["Rank","Bonus","Rank","Bonus"],widths:["0.6fr","1fr","0.6fr","1fr"],rows:[
+    ["1st","+100,000","6th","+40,000"],
+    ["2nd","+80,000","7th","+35,000"],
+    ["3rd","+60,000","8th","+30,000"],
+    ["4th","+55,000","9th","+25,000"],
+    ["5th","+50,000","10th","+20,000"]]},
+  {t:"callout",v:"info",title:"The smelter is a rank shortcut — but only if you can hold a second",text:"Occupancy is ranked by <b>time held</b>. Even a brief foothold can land ~2nd (+80k) and jump you many leaderboard places. But it's fiercely contested PvP — beginners should <b>skip it unless they can hold 1+ second</b> during the chaos, and never wipe their heroes on an unwinnable fight for it."},
+  {t:"setups",h:"By power / spend",items:[
+    {name:"Low power (F2P)",split:"Hunt path — Lv1/2 Veins on the edges",when:"20–40M power, avoiding whales.",strength:"Patrols to max skills fast, then the 60s cycle + outbursts nets a solid ~380–550k with almost no PvP.",weakness:"Can't hold Lv3 Veins or the smelter against spenders — don't try."},
+    {name:"Mid power",split:"Gather path — contest Lv3 Veins, grab outbursts",when:"You can win some vein fights.",strength:"Occupy Lv3s with all 6 marches, run the cycle, take every outburst. ~100–150k+ and mid-leaderboard.",weakness:"Expect PvP on your Veins; relocate rather than feed a losing fight."},
+    {name:"High power / whale",split:"Aggressive — Lv3 dominance + smelter #1",when:"Chasing rank 1–3.",strength:"Damage-path Level-5, steal occupied Veins, and rush the smelter for +100k. 500k+ is realistic.",weakness:"Only worth the spend if it actually moves your rank — past ~75k milestone, value is all in placement."}]},
+  {t:"scripts",h:"Leader calls",items:[
+    {title:"PRE-EVENT",lines:["Frostfire slot UTC __ — register early, be in during the 3-min prep.","Clear all marches, 6 queues, 33/33/33 troops, gather buffs ON. World march tech doesn't apply here."]},
+    {title:"OPEN",lines:["GO — hunt patrols for XP, don't mine yet. Rush right-1, right-2, left-3.","Once you have the +5,000 skill, start the 60-second vein cycle."]},
+    {title:"OUTBURST",lines:["Outburst in 60s — free up your marches. On spawn: recall off veins and swarm it.","Back to the cycle after ~20s."]},
+    {title:"SMELTER (23:00)",lines:["Smelter open — rank-chasers rush center with a fast squad, speedups if contending for #1.","Everyone else: keep cycling and loot piles to the buzzer."]}]},
+  {t:"table",h:"Milestone rewards (personal Orichalcum, approx.)",cols:["Orichalcum","Reward"],widths:["1fr","2.6fr"],rows:[
+    ["10k–40k","1h speedups + basic resources"],
+    ["<b>75k</b>","<b>Charm Guides</b> + speedups + resource packs (the key F2P target)"],
+    ["100k–150k","More Charm Guides + 1h speedups + max resources"]]},
+  {t:"callout",v:"info",title:"Rank rewards & the 75k rule",text:"Leaderboard rank pays Charm Design Plans, Gear Guides, Gems (up to ~4,000 for podium) and avatar frames. But <b>spending past the ~75k milestone only pays off if it raises your rank</b> — otherwise the milestone is the ceiling of guaranteed value. F2P: clear 75k, grab the mid-tier rewards along the way (no diminishing returns), and rank as high as the cycle takes you."},
+  {t:"cases",h:"Common mistakes",items:[
+    {if:"You mined Veins from minute 0.",do:"You slowed your skill unlocks. Hunt patrols first for the 5,400 XP, THEN mine."},
+    {if:"You missed an outburst window.",do:"That's the biggest yield in the game (4,000 in 20s). Watch the 60s/10s banner and keep free marches ready at the 8/9/10 & 18/19/20 marks."},
+    {if:"You fed heroes into a losing Vein fight.",do:"Your heroes are locked 5 minutes. Skip unwinnable fights, take empty Veins, and relocate with a free teleport instead."},
+    {if:"You chased the final milestone and skipped the mid ones.",do:"Claim 10k/40k/75k as you pass them — they stack with no downside."},
+    {if:"You wasted speedups on random tasks.",do:"Only spend them on teleport-gating or the smelter rush — nothing else in-event needs them."}]},
+  {t:"vet",text:"Frostfire Mine rewards discipline, not power. Prep near the edges, hunt patrols first for the 5,400 XP, then live on the 60-second vein cycle: occupy, +5,000, recall, repeat. Never miss an outburst — they're 4,000 in 20 seconds and they win the event. Clear the 75k milestone for the Charm Guides, and only reach past it or touch the smelter if you're genuinely chasing rank. Teleport out of dead zones, don't feed heroes into losing fights, and remember world march tech doesn't apply here — bring gather buffs and March Speed gear instead. Simple loop, repeated cleanly, out-scores most bigger accounts."}
+ ]},
 
 {id:"foundry",icon:"foundry",cat:"war",name:"Foundry Battle",type:"Alliance · PvP",cadence:"Bi-weekly · 60 min",req:"Furnace 16 · Top 20",duration:"60 min",deep:true,
  ov:"A bi-weekly, 60-minute alliance war for the Imperial Foundry of the fallen Solaris Dynasty. Two alliances enter a shared battlefield and fight for Arsenal Points by capturing and holding buildings. This is a guide for every member of the legion — what the event is, what to grab, which heroes to bring, and how to play your part so LWS wins.",
