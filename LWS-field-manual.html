@@ -1199,12 +1199,6 @@ const EVENTS = [
     {if:"You're far from the trap.",do:"Reposition closer if your alliance allows it — faster travel means more rally cycles."},
     {if:"It's the last few minutes.",do:"Pile onto the tested strong captains, not a friend's vanity rally."},
     {if:"Your city is shielded.",do:"You can still join — the shield isn't removed."}]},
-  {t:"scripts",h:"Clean joiner calls",items:[
-    {title:"USING JESSIE",lines:["Jessie march out — joining main captain only."]},
-    {title:"GOING FILLER",lines:["Jessie's out. Next march is filler so I don't overwrite."]},
-    {title:"MY BAD",lines:["Wrong hero sent by mistake — switching to filler next rally."]},
-    {title:"REPOSITIONING",lines:["Too far from the trap — moving closer for faster turnover."]}]},
-
   {t:"p",h:"If you're captaining a rally",text:"A captain's damage IS the rally's damage, so this is where the real optimisation lives. All <b>three</b> of your heroes' expedition skills fire (up to 9 buffs). You want flat attack, damage-dealt and lethality skills — avoid stun, stamina-cut and heavy-RNG. Keep at least one of each troop type in the march so all three heroes' skills switch on. Position close to the trap and space your calls so a rally lands on the Bear roughly every 30 seconds."},
   {t:"table",h:"Best captain heroes (cross-generation)",cols:["Hero","Why it captains well"],widths:["0.7fr","2fr"],rows:[
     ["<b>Jeronimo</b>","+25% troop damage & +25% attack, periodic +30% damage, +15% rally-attack widget — the recurring top anchor across generations."],
@@ -1314,18 +1308,6 @@ const EVENTS = [
     {if:"You are about to miss an online-only wave (7/14/17).",do:"Get online — even parked reinforcing an attacked ally scores. These waves only pay online players and are worth roughly double."},
     {if:"HQ 20 keeps burning despite clean positioning.",do:"It is almost always the lead trio, the recall timing, or the doctrine — not everyone doing more random stuff. Try a stronger garrison lead or flip to marksman HQ; do not add noise."},
     {if:"You sent the wrong troops or hero to HQ.",do:"Do not improvise further — follow the captain ratio on your next redeploy. If you are not the main lead, one support hero in slot 1 only."}]},
-  {t:"scripts",h:"Clean captain / member calls",items:[
-    {title:"HQ RECALL",lines:["Wave 9 hits landed — HQ team recall and send now.","Everyone else hold city swaps."]},
-    {title:"ONLINE WAVE",lines:["Wave 14 next, online-only. Stay active.","Not attacked? Support the attacked cities — don't pull from them early."]},
-    {title:"REFILL",lines:["HQ done — redeploy city swaps immediately for 11–19."]},
-    {title:"NO HEAL / NO TP",lines:["Do not heal and do not teleport mid-run — both cost points."]}]},
-  {t:"alliance",h:"Captaining a run",items:[
-    "<b>Before start:</b> post the city-swap plan, post the HQ wave 10/20 plan, name ONE HQ garrison lead, and set this week doctrine (defensive vs marksman HQ).",
-    "Assign who must stay online for waves <b>7 / 14 / 17</b>, and pair members for reinforcement swaps.",
-    "Keep the hive <b>tight around HQ (~1–2 min march)</b> — territory bonus stats and clean wave timing both depend on it.",
-    "Set difficulty to the hardest tier you clear <b>cleanly</b>. A higher tier better rewards are wiped out by failed cities and a burned HQ — <b>clear deeply before you climb</b>.",
-    "<b>During:</b> call recall after wave 9/19 lands, refill swaps after HQ, stay online for 7/14/17, and no heal / no teleport.",
-    "<b>After:</b> read the reports — did cities fail on coverage, swaps, or hero setup? Fix the doctrine, do not re-run a broken plan. If unlocked, the Expert <b>Baldur</b> adds extra event rewards."]},
   {t:"rewards",h:"Rewards",items:[
     "<b>Personal milestones &amp; state ranking</b> — driven by your own Crazy Joe points.",
     "<b>Chief Gear materials:</b> Hardened Alloy and Polishing Solution — Joe is one of the best F2P sources of both.",
@@ -1336,8 +1318,69 @@ const EVENTS = [
   {t:"vet",text:"Crazy Joe is an operations event, not a power event. The alliances that win are not the strongest — they are the ones where everyone swaps early, keeps their city empty, stays online for 7/14/17, and recalls only after the city hits land. Empty your city, send infantry, do not heal, do not teleport, and hit every online wave. Then read your reports and fix one thing each run — coverage, swap timing, hero setup, or HQ doctrine. Simple, repeatable, and it compounds every cycle."}
  ]},
 
-{id:"champ",icon:"champ",cat:"war",name:"Alliance Championship",type:"Alliance · PvP",cadence:"Weekly · 5 rounds",req:"—",duration:"Week-long",deep:true,
- ov:"Coming soon — details TBA."},
+{id:"champ",icon:"champ",cat:"war",name:"Alliance Championship",type:"Alliance · PvP",cadence:"Weekly · 5 rounds",req:"Furnace 10+",duration:"Mon–Mon · auto battles",deep:true,
+ ov:"A weekly alliance PvP tournament: six similar alliances fight a round-robin over <b>5 rounds</b> across <b>3 lanes</b>. The battles are <b>fully automated</b> — as a member your whole job happens at <b>registration</b>: sign up one march with your buffs active, then follow lane assignments. Win 2 of 3 lanes to win a round; round wins climb your alliance through tiers (Iron → Ultimate) for better rewards. This guide is the member's side: how to register right, the buff-snapshot trick, lane discipline, and the badge shop.",
+ page:[
+  {t:"callout",v:"good",title:"AC is won at registration, not in battle",text:"You never control the fight — it's simulated from your <b>registered march</b>. Your entire influence is: register your <b>strongest combat squad</b> with <b>buffs active</b>, in the lane you're told, before sign-up closes. Do that well and you've done your job for the whole week."},
+  {t:"callout",v:"warn",title:"The buff snapshot — the #1 thing to get right",text:"Your march's power and <b>all active buffs are frozen the instant you hit Register</b>, and they stay active for <b>all 5 rounds</b> even after they'd normally expire. So <b>turn on pet buffs (and city/attack buffs) BEFORE registering</b>. And once you've registered with buffs, <b>do NOT register again without them</b> — re-registering overwrites the snapshot and wipes your buffs."},
+  {t:"p",h:"What it is",text:"You need <b>Furnace 10+</b> and to be in the alliance; the alliance needs <b>10+ registered members</b> to qualify. It runs weekly Mon 00:00 → Mon 00:00 UTC. You register <b>one march</b> into one of three lanes. During battles, marches fight the enemy alliance's matching lane automatically; <b>only the top 20 by power in each lane actually fight</b>, weakest first, and a march that wins is pulled after a <b>maximum of 2 wins per round</b>. Win 2 of 3 lanes = round win (3 pts); draw = 1; loss = 0. Ties on points break on total lanes won."},
+  {t:"flow",h:"The weekly phases",items:[
+    {label:"Sign-up (Mon 00:00 – Wed 23:00 UTC)",game:"Register one march into a lane.",you:"Register with buffs active. Default to the MIDDLE lane unless told otherwise (see below)."},
+    {label:"Matchmaking (Wed 23:00 – Thu 00:00)",game:"Six similar alliances grouped.",you:"Nothing to do — just don't re-register and lose your buffs."},
+    {label:"Prep + Battle ×5 (Thu – Sat)",game:"11h prep, then 1h auto-battle, per round.",you:"Move to your assigned lane when leadership calls it. Battles are automatic — you just watch results."},
+    {label:"Completion (Sat 12:00 – Mon 00:00)",game:"Final tier + rewards, AC Shop open.",you:"CLAIM your tier + KO mail and SPEND your badges before Monday reset — both expire."}]},
+  {t:"callout",v:"info",title:"Register after Bear Trap (buff timing trick)",text:"Register <b>Tuesday or Wednesday, right after a Bear Trap</b>, so your <b>pet buffs are still active</b> when you lock in — that snapshot then boosts your squad for all 5 rounds. Spenders can also pop city Attack/Defense bonuses at the moment of registration. Don't register Monday buff-less and waste the free power."},
+  {t:"callout",v:"warn",title:"Everyone registers MIDDLE lane at sign-up",text:"Unless your leadership says otherwise, <b>put your march in the middle lane</b> when you register. The matchmaker reads one stacked lane + two empty as a weaker alliance and gives you <b>easier opponents</b>; leadership then redistributes everyone into real lanes during prep. Spreading yourselves across all three lanes at sign-up gets you harder matchups."},
+  {t:"p",h:"Combat power ≠ your open-world power",text:"AC uses <b>expedition/combat stats</b> (hero combat bonus, base ATK), NOT gathering or exploration power. So a combat hero like <b>Bahiti (4&#9733;) beats an exploration hero like Gina (5&#9733;)</b> here. When you build your AC march, ignore exploration buffs (they don't count) and pick your highest-<b>combat</b> heroes and best attack/crit gear."},
+  {t:"table",h:"Strong AC heroes (combat stats matter)",cols:["Hero","Role","Why"],widths:["1fr","1.1fr","2fr"],rows:[
+    ["<b>Jeronimo</b>","Infantry DPS","Huge combat stats + a triple-slash skill; the recurring top attacker anchor."],
+    ["<b>Bahiti</b>","Marksman DPS","Precise Shot hits 400%+ single-target — a combat monster despite being Epic."],
+    ["<b>Gina</b>","Marksman AoE","Incendiary Arrow AoE; strong secondary damage lane hero."],
+    ["<b>Patrick</b>","Lancer support","Feast heals allies (~150% ATK) + damage reduction — keeps a lane alive."]]},
+  {t:"ratios",h:"Troop ratios (Inf / Lance / Mark) — NOT the 33/33/33 default",items:[
+    {label:"Gen 1–3 standard (durable, best all-round)",r:[50,20,30]},
+    {label:"Infantry-heavy alternative (max frontline)",r:[60,20,20]},
+    {label:"Gen 4+ / matchmaking-savvy",r:[60,40,0]}]},
+  {t:"callout",v:"warn",title:"Never use the default 33/33/33",text:"Infantry are your damage-absorbing wall — once they fall, your backline melts instantly. Run <b>at least 50% infantry</b>. The community standard is <b>50/20/30</b> (Inf/Lance/Mark) for Gen 1–3 states; the small Lancer/Marksman slices exist mostly so your support heroes' all-troop buff skills keep triggering. Gen 4+ states sometimes run 60/40/0 to lower displayed power (easier matchmaking) while fighting stronger."},
+  {t:"check",h:"Your registration checklist",items:[
+    "Be <b>Furnace 10+</b> and registered <b>before Wed 23:00 UTC</b> — a no-show hurts the whole alliance's count.",
+    "Build your <b>highest-combat</b> march (combat stats, not exploration); best <b>attack/crit gear</b>, troops upgraded.",
+    "Set your ratio to <b>~50/20/30</b> (or as leadership directs) — never 33/33/33.",
+    "<b>Activate pet buffs (and city Attack/Defense if you have them) BEFORE hitting Register.</b>",
+    "Register into the <b>middle lane</b> (default) — leadership moves you in prep.",
+    "After registering with buffs, <b>don't touch it again</b> — re-registering wipes the buff snapshot.",
+    "During the week, <b>move to your assigned lane</b> when called; then just watch."]},
+  {t:"decision",h:"Where do I put my march?",nodes:[
+    {k:"start",t:"Sign-up phase (Mon–Wed)"},
+    {k:"q",t:"Has leadership posted specific lane assignments yet?",yes:"Register into the lane they assigned you.",no:"Register into the MIDDLE lane with buffs active — it improves matchmaking."},
+    {k:"act",t:"During prep each round, leadership redistributes lanes."},
+    {k:"end",t:"Move your march to your assigned lane when called, then watch the auto-battle."}]},
+  {t:"table",h:"Tiers & alliance rewards",cols:["Tier","Perk"],widths:["1fr","2.4fr"],rows:[
+    ["Iron → Silver II","Climbing rewards: Alloys, Polishing Solution, Design Plans, Pet Manuals, hero shards."],
+    ["<b>Silver III+</b>","Unlocks the <b>alliance statue</b>: +3% gathering (Silver), +5% Gold, +7% Diamond, +10% Ultimate."],
+    ["<b>Ultimate</b>","<b>Knight skin set</b> (city, march, nameplate, avatar frame) for 14 days for every member."]]},
+  {t:"p",h:"KO rewards (your personal payout)",text:"Beyond alliance tier, you earn <b>KO rewards</b> for eliminating enemy marches: <b>KO1</b> for defeating one, <b>KO2</b> for defeating two (your march's cap per round). Winning your fights = free speedups and resources by mail. Note: if you <b>leave the alliance before the event ends you forfeit your KO rewards</b> (your troops still fight for the old alliance, but you get the new alliance's tier mail instead)."},
+  {t:"split",h:"AC Shop — spend badges well",cols:[
+    {title:"Priority buys",items:[
+      "<b>Sigils</b> first — rare and critical for Dawn Academy experts.",
+      "<b>Design Plans</b> next — essential for gear crafting.",
+      "<b>Pet materials</b> and Chief Gear mats (Alloys, Polishing Solution)."]},
+    {title:"Skip / low value",items:[
+      "Basic resources and generic speedups — you farm those elsewhere cheaper.",
+      "Save badges across weeks for a big Sigil/Design-Plan buy rather than splurging on filler.",
+      "The shop <b>resets Monday 00:00 UTC</b> — spend before it wipes."]}]},
+  {t:"setups",h:"By alliance strength",items:[
+    {name:"Small / F2P alliance",split:"2 lanes stacked, 1 lane fodder",when:"Weaker or thin roster.",strength:"Put your ~40 strongest split across two lanes, dump the rest in the third. You only need 2 wins — a 0-3 loss in the fodder lane is fine.",weakness:"Requires discipline: everyone must know which lane to ignore."},
+    {name:"Mid alliance",split:"2-1 focus, even out two lanes",when:"Can field three lanes but not dominate.",strength:"Balance power across two lanes to reliably take them; contest or sacrifice the third.",weakness:"Don't spread thin chasing a risky 3-0."},
+    {name:"Top alliance",split:"Contest all three or all-in two",when:"Strong across the roster.",strength:"Can attempt 3-0 sweeps or force clean 2-1s, and chase extra KO2s for bonus loot.",weakness:"3-0 is high-risk — often smarter to concede one lane and win two cleanly."}]},
+  {t:"cases",h:"Common member mistakes",items:[
+    {if:"You registered Monday with no buffs.",do:"You locked a weaker snapshot for all 5 rounds. Re-register WITH pet/city buffs active (Tue/Wed after Bear Trap) — but only once."},
+    {if:"You re-registered to 'fix' something and lost your buffs.",do:"Registering again overwrites the snapshot. Register the final time with all buffs on and then leave it alone."},
+    {if:"You used the 33/33/33 default ratio.",do:"Your infantry wall is too thin — rebuild to ~50/20/30 before the deadline."},
+    {if:"You spread to a side lane at sign-up on your own.",do:"Go back to middle unless assigned — solo lane moves break the matchmaking plan."},
+    {if:"You forgot to claim mail / spend badges.",do:"Tier mail, KO mail and AC Shop badges all expire Monday 00:00 UTC — claim and spend before reset."}]},
+  {t:"vet",text:"Alliance Championship is a registration event dressed as a battle. Your one job: build your strongest COMBAT march (not exploration), set ~50/20/30, turn pet and city buffs ON, and register into the middle lane Tuesday or Wednesday after Bear Trap so the buff snapshot rides all 5 rounds. Then move to your assigned lane when leadership calls it and watch. Win your fights for KO rewards, claim your mail, and spend badges on Sigils and Design Plans before Monday. Do that every week and the tier — and the free gathering statue — takes care of itself."}
+ ]},
 
 {id:"fort",icon:"fort",cat:"war",name:"Fortress Battles",type:"Alliance · PvP",cadence:"Weekly · Friday",req:"—",duration:"Timeslot",deep:true,
  ov:"Coming soon — details TBA."},
@@ -1388,11 +1431,6 @@ const EVENTS = [
     {name:"Low power (F2P)",split:"Hunt path — Lv1/2 Veins on the edges",when:"20–40M power, avoiding whales.",strength:"Patrols to max skills fast, then the 60s cycle + outbursts nets a solid ~380–550k with almost no PvP.",weakness:"Can't hold Lv3 Veins or the smelter against spenders — don't try."},
     {name:"Mid power",split:"Gather path — contest Lv3 Veins, grab outbursts",when:"You can win some vein fights.",strength:"Occupy Lv3s with all 6 marches, run the cycle, take every outburst. ~100–150k+ and mid-leaderboard.",weakness:"Expect PvP on your Veins; relocate rather than feed a losing fight."},
     {name:"High power / whale",split:"Aggressive — Lv3 dominance + smelter #1",when:"Chasing rank 1–3.",strength:"Damage-path Level-5, steal occupied Veins, and rush the smelter for +100k. 500k+ is realistic.",weakness:"Only worth the spend if it actually moves your rank — past ~75k milestone, value is all in placement."}]},
-  {t:"scripts",h:"Leader calls",items:[
-    {title:"PRE-EVENT",lines:["Frostfire slot UTC __ — register early, be in during the 3-min prep.","Clear all marches, 6 queues, 33/33/33 troops, gather buffs ON. World march tech doesn't apply here."]},
-    {title:"OPEN",lines:["GO — hunt patrols for XP, don't mine yet. Rush right-1, right-2, left-3.","Once you have the +5,000 skill, start the 60-second vein cycle."]},
-    {title:"OUTBURST",lines:["Outburst in 60s — free up your marches. On spawn: recall off veins and swarm it.","Back to the cycle after ~20s."]},
-    {title:"SMELTER (23:00)",lines:["Smelter open — rank-chasers rush center with a fast squad, speedups if contending for #1.","Everyone else: keep cycling and loot piles to the buzzer."]}]},
   {t:"table",h:"Milestone rewards (personal Orichalcum, approx.)",cols:["Orichalcum","Reward"],widths:["1fr","2.6fr"],rows:[
     ["10k–40k","1h speedups + basic resources"],
     ["<b>75k</b>","<b>Charm Guides</b> + speedups + resource packs (the key F2P target)"],
@@ -1573,10 +1611,6 @@ const EVENTS = [
     ["Lv.3","Helios Cannon","Adds Lv.2 resource chests."],
     ["Lv.4","Callisto Mark II","5,000-tier resource chests."],
     ["Lv.5","Behemoth","10,000-tier resource chests."]]},
-  {t:"scripts",h:"Leader scripts",items:[
-    {title:"EVENT OPEN",lines:["Merc window 19:00 server. Save all 5 contracts for walls.","Use Gina while she still wins. Don't scout if you're going offline.","First 4 joiners on help-rallys: Jessie/Jasser/Jero/Seo first slot. Others blue-filler first."]},
-    {title:"CAPTAIN",lines:["Captain up in 5. Everyone online tag with 1 troop first so all hits register.","On GO, switch to full marches. Do not snipe early."]},
-    {title:"HELP-RALLY",lines:["Strong rally needed on Stage X. Premium leads only.","First 4 joiners buffs, rest filler-first-slot — don't replace a level-5 Jessie."]}]},
   {t:"rewards",h:"Rewards — why you keep climbing",items:[
     "Early tiers: Mythic hero shards, Gems, Hero XP, Speedups, and resource chests.",
     "<b>Champions Insane+</b>: Fire Crystals become significant.",
@@ -1708,10 +1742,6 @@ const EVENTS = [
     {name:"F2P",split:"Missions + collections + free daily chart",when:"You aren't buying packs.",strength:"~10–13k points is plenty for all daily rewards; steady collection progress every season.",weakness:"Top ranks are essentially out of reach — don't chase skins, chase the free value."},
     {name:"Light spender ($1–$10)",split:"Fishing Pro Set, bought BEFORE fishing",when:"You want a faster kit and some charts.",strength:"Instantly maxes the kit and grants charts/items; ~20–35k points; can contend for city-skin ranks over several events if you save charts.",weakness:"Still needs chart-saving discipline across months for top-15."},
     {name:"Whale",split:"All packs + Ice Fishing Club tiers, big Day-3 push",when:"You're going for rank 1–6.",strength:"Every Voucher on Frosty, ~45–60 saved charts, 60k–100k+ points; also hits the 50k Daybreak aquarium mark.",weakness:"Expensive and chart-gated — one big push on Day 3 to avoid tipping off rivals."}]},
-  {t:"scripts",h:"Alliance chat templates",items:[
-    {title:"DAY 1",lines:["Fishing Tournament is live! Everyone gets 5 baits/day — hit 2,000 pts each day for the mission rewards.","Save Lanterns/Scanners/Vouchers/Horns for Frosty Prospector runs. Don't cap your bait at 10."]},
-    {title:"DAY 2",lines:["New baits + missions reset — clear 2,000 again.","Kit maxed? Spin Sunken Treasure with spare tokens. Rank-chasers: stockpile charts, we push Day 3."]},
-    {title:"DAY 3",lines:["Final day — use all your Frosty charts now, Horns + Vouchers on your best casts.","Claim every Ice Fishing Club level and your inbox mail before it ends."]}]},
   {t:"cases",h:"Common mistakes",items:[
     {if:"Your bait is sitting at 10.",do:"You've stopped regenerating — cast now. Never let it cap; that's free points lost every 3 hours."},
     {if:"You used a Horn on a common fish.",do:"Wasted. Horns are only for a guaranteed 5&#9733; or a missing-collection fish, and only at a depth your Line can reach."},
